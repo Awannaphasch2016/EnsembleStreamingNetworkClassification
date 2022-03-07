@@ -2,7 +2,8 @@
  "reference"
  (lambda ()
    (LaTeX-add-bibitems
-    "dai2016discriminative"
-    "ribeiro2017struc2vec"))
+    "barrosSurveyEmbeddingDynamic2021"
+    "kazemiRepresentationLearningDynamica"
+    "skardingFoundationsModelingDynamic2021"))
  :bibtex)
 
