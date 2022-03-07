@@ -26,4 +26,4 @@ Dynamic graph is known in other named as streaming graph and temporal graph. Con
 
 * Bibliogrpah :ignore:
 \bibliographystyle{plain}
-bibliography:~/Documents/MyPapers/EnsembleStreamingNetworkClassificaition/reference.bib
+bibliography:./reference.bib
