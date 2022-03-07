@@ -1,0 +1,29 @@
+#+TITLE: Ensemble Approaches for Streaming Networking Classification
+#+DATE: <2022-03-03 Thu>
+#+AUTHOR: Anak Wannaphaschaiyong
+#+EMAIL: awannaphasch2016@fau.edu
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: IEEE
+# #+LATEX_CLASS: acmart
+# #+LATEX_CLASS: org-plain-text
+
+* Introduction
+# Start to draw a system framework, which shows the complete framework of your ensemble approach for streaming graph prediction.
+
+# What are streaming graphs (dynamic nodes, edges et.c)? what are streaming graphs applications? Why streaming graphs are important
+Dunamic graph is vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
+Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into subcategories [[cite:&barrosSurveyEmbeddingDynamic2021;&kazemiRepresentationLearningDynamica;&skardingFoundationsModelingDynamic2021]].
+
+# For streaming graphs, what are analytics objective (or learning objective)? E.g., node classification, link prediction?
+# For static graph (no st[[cite:&skardinga2021foundations]]reaming or changing edges), what are typical link prediction or node classification solutions. What are challenges, if network is dynamically changing?
+# What are graph embedding learning, what are challenges if graphs are dynamically changing?
+# What are the main motivation of the proposed research? What are the overall framework of the proposed design?
+# What are brief results of the proposed design.
+
+* Related Work
+** Sliding Window Evaluation
+** Dynamic Graph
+
+* Bibliogrpah :ignore:
+\bibliographystyle{plain}
+bibliography:/home/awannaphasch2016/org/papers/zotero-bib.bib
