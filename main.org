@@ -4,26 +4,38 @@
 #+EMAIL: awannaphasch2016@fau.edu
 #+OPTIONS: toc:nil
 #+LATEX_CLASS: IEEE
-# #+LATEX_CLASS: acmart
-# #+LATEX_CLASS: org-plain-text
+#+latex_header: \usepackage[backend=biber, style=numeric]{biblatex}
+#+latex_header: \addbibresource{reference.bib}
 
 * Introduction
+:PROPERTIES:
+:ID:       32be6ae3-6af3-49d0-9edb-b2009b3f6e42
+:END:
 # Start to draw a system framework, which shows the complete framework of your ensemble approach for streaming graph prediction.
 
 # What are streaming graphs (dynamic nodes, edges et.c)? what are streaming graphs applications? Why streaming graphs are important
-Dunamic graph is vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
-Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into subcategories [[cite:&barrosSurveyEmbeddingDynamic2021;&kazemiRepresentationLearningDynamica;&skardingFoundationsModelingDynamic2021]].
+Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
+Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies [[cite:&barrosSurveyEmbeddingDynamic2021;&kazemiRepresentationLearningDynamica;&skardingFoundationsModelingDynamic2021]].
+
+# For static graph (no streaming or changing edges), what are typical link prediction or node classification solutions. What are challenges, if network is dynamically changing?
+In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network).
+The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
+
+Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph.)
 
 # For streaming graphs, what are analytics objective (or learning objective)? E.g., node classification, link prediction?
-# For static graph (no st[[cite:&skardinga2021foundations]]reaming or changing edges), what are typical link prediction or node classification solutions. What are challenges, if network is dynamically changing?
-# What are graph embedding learning, what are challenges if graphs are dynamically changing?
 # What are the main motivation of the proposed research? What are the overall framework of the proposed design?
+Currently, in the field of machine learning on dynamic network, simply train-test split is used to conclude models performance. This is not a good idea because dynamic network data is a sequential data. It is more appropriate to use sliding window evaluation. Sliding window evaluation is a well known technique that is a gold standard for sequential data such as time series data. Furthermore, we found that models capacity directly depends on sliding window parameters such as window size, epoch per window etc. Therefore, without adopting sliding window evaluation as a standard to evaluate performance of dynamic network, one cannot create a fair environment to compare performance between dynamic network based models.
+For this reason, in this paper, we adopt window sliding window evaluation to evaluate link prediction and node classification using dynamic network as input.
+The paper analyze multiple ensemble approaches which can only be adopted via sliding window evaluation. This provides another tool to be used within dynamic graph environment.
+
 # What are brief results of the proposed design.
 
 * Related Work
 ** Sliding Window Evaluation
+To the best of my knowledge, "BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION" is the only paper that attempts to compare dynamic network based models using sliding window evaluation.
 ** Dynamic Graph
-
-* Bibliogrpah :ignore:
-\bibliographystyle{plain}
-bibliography:./reference.bib
+:PROPERTIES:
+:ID:       13892178-9d6d-4add-8f7e-cfaf0a728a59
+:END:
+\printbibliography

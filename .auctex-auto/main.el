@@ -17,12 +17,15 @@
     "amsmath"
     "amssymb"
     "capt-of"
-    "hyperref")
+    "hyperref"
+    "biblatex")
    (LaTeX-add-labels
-    "sec:org6e21c83"
-    "sec:orgf14dfef"
-    "sec:orga508efc"
-    "sec:org4f2fba1")
+    "sec:org512dbe3"
+    "sec:org619cfe9"
+    "sec:org39a3cee"
+    "sec:org5d7066c")
+   (LaTeX-add-environments
+    '("IEEEbiography" LaTeX-env-args ["argument"] 1))
    (LaTeX-add-bibliographies
     "reference"))
  :latex)

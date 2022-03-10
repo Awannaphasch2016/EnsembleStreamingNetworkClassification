@@ -1,4 +1,4 @@
-% Created 2022-03-07 Mon 13:06
+% Created 2022-03-10 Thu 13:42
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -12,6 +12,9 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\usepackage[backend=biber, style=numeric]{biblatex}
+
+\addbibresource{reference.bib}
 \author{Anak Wannaphaschaiyong}
 \date{\textit{<2022-03-03 Thu>}}
 \title{Ensemble Approaches for Streaming Networking Classification}
@@ -20,17 +23,25 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:orgf2acddc}
-Dunamic graph is vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
-Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into subcategories \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
+\label{sec:org2ff0ac5}
+Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
+Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
+
+In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network).
+The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
+
+Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph.)
+
+Currently, in the field of machine learning on dynamic network, simply train-test split is used to conclude models performance. This is not a good idea because dynamic network data is a sequential data. It is more appropriate to use sliding window evaluation. Sliding window evaluation is a well known technique that is a gold standard for sequential data such as time series data. Furthermore, we found that models capacity directly depends on sliding window parameters such as window size, epoch per window etc. Therefore, without adopting sliding window evaluation as a standard to evaluate performance of dynamic network, one cannot create a fair environment to compare performance between dynamic network based models.
+For this reason, in this paper, we adopt window sliding window evaluation to evaluate link prediction and node classification using dynamic network as input.
+The paper analyze multiple ensemble approaches which can only be adopted via sliding window evaluation. This provides another tool to be used within dynamic graph environment.
 
 \section{Related Work}
-\label{sec:orgc29b800}
+\label{sec:orgc9d290c}
 \subsection{Sliding Window Evaluation}
-\label{sec:org5d490fc}
+\label{sec:org4dd8453}
+To the best of my knowledge, ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' is the only paper that attempts to compare dynamic network based models using sliding window evaluation.
 \subsection{Dynamic Graph}
-\label{sec:org7e4a7f1}
-
-\bibliographystyle{plain}
-\bibliography{reference}
+\label{sec:orgf0ad5e5}
+\printbibliography
 \end{document}
