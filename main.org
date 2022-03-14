@@ -78,17 +78,13 @@ Sliding window is specially important in dynamic based graph when applying ensem
 
 Furthermore, sequence of windows allows one to apply a higher level of abstraction over sequence of events which may influence models design. In this case, sliding window evaluation must be applied to all the models involve to create a fair comparison.
 
-In the time of writing, dynamic graph model literature still uses simple train-val-test split as a model evaluation standards. We provide examples of well accepted paper to make a point. Tian et al. [[cite:&tian2021self]] use 70-15-15 split to evaluate self-supervised learning on strictly evolving graph and compare with models. Performance of models are evaluated based on two tasks: link prediction and node classification. The comparison is limited to static graph models, and dynamic random walk. Similarly, using the same dataset, Rossi et al. [[cite:&rossi2020temporal]] also use 70-15-15 splits. Rossi et al. compare its own, temporal graph neural network (TGN) to one other dynamic graph, DyRep. The comparison is acceptable because same dataset is used in the experiment. Dataset used in mentioned papers are collected as interaction network.
+In the time of writing, dynamic graph model literature still uses simple train-val-test split as a model evaluation standards. We provide examples of well accepted paper to make a point. Tian et al. [[cite:&tian2021self]] use 70-15-15 split to evaluate self-supervised learning on strictly evolving graph and compare with models. Performance of models are evaluated based on two tasks: link prediction and node classification. The comparison is limited to static graph models, and dynamic random walk. Details to extend static graph models to dynamic graphs are not discussed. Similarly, using the same dataset, Rossi et al. [[cite:&rossi2020temporal]] also use 70-15-15 splits. Rossi et al. compare its own, temporal graph neural network (TGN) to one other dynamic graph, DyRep. The comparison is acceptable because same dataset is used in the experiment. Dataset used in mentioned papers are collected as undirected interaction network.
 
 It is very important to understand that how models receive data --- stream data, one instance at a time, or in batch --- implies underlying graph type. This is because it implies existence duration of nodes and edges which is used to classify dynamic graph based on taxonomies proposed by Skarding et al. [[cite:&skardingFoundationsModelingDynamic2021]]. For detail about taxonomies of dynamic graph can be found in [[#taxonomies of dynamic graph]] section.
 
-*** TODO what are ways in which papers evaluate their models? and how do they create a fair comparison within sliding window? :ignore:
-:PROPERTIES:
-:ID:       6575316b-9418-4241-8a45-8498086e2f39
-:END:
+To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION" cite:&skarding2021benchmarking which is the only paper to compare dynamic network based models using sliding window evaluation. Directed and undirected interaction network is used. Interaction network can be easily aggregated to form "graph snapshot." Hence, using interaction network, one can pass in continuous network to continuous model and discrete network to discrete models.
 
-To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION" cite:&skarding2021benchmarking which is the only paper to compare dynamic network based models using sliding window evaluation.
-# what was the methodology that the paper use?
+Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters is essential for obtaining a representative score. This conclusion applies for both static and dynamic graph models. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
 
 
 
@@ -98,9 +94,6 @@ To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NE
 :ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
 :END:
 *Reddit dataset*: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table [[ref:Datasets]].
-# where is the data frome?
-# show tables of data attribute
-
 
 #+NAME: Datasets
 #+CAPTION: Datasets
