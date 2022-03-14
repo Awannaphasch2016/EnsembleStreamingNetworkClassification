@@ -1,4 +1,4 @@
-% Created 2022-03-10 Thu 13:42
+% Created 2022-03-14 Mon 02:31
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -23,7 +23,7 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:org2ff0ac5}
+\label{sec:orgf86a45b}
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
 
@@ -36,12 +36,35 @@ Currently, in the field of machine learning on dynamic network, simply train-tes
 For this reason, in this paper, we adopt window sliding window evaluation to evaluate link prediction and node classification using dynamic network as input.
 The paper analyze multiple ensemble approaches which can only be adopted via sliding window evaluation. This provides another tool to be used within dynamic graph environment.
 
+[What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
+
+
 \section{Related Work}
-\label{sec:orgc9d290c}
-\subsection{Sliding Window Evaluation}
-\label{sec:org4dd8453}
-To the best of my knowledge, ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' is the only paper that attempts to compare dynamic network based models using sliding window evaluation.
+\label{sec:orgd5bfae2}
 \subsection{Dynamic Graph}
-\label{sec:orgf0ad5e5}
+\label{sec:org93e4b95}
+\subsubsection{Taxonomy of Dynamic Graph}
+\label{sec:org287b15b}
+At the time of writing many taxonomies of dynamic graph models has been proposed.
+In this related work section, we will discuss previous attempts to categorize dynamic graph models into groups. Before discussing previous attempt, one should understand types of dynamic behavior that can affect dynamic graph models. There are two types of dynamic behaviors which are referred to in referenced literature by different names, nonetheless, we will refer to the two types as ``dynamic behavior on graph'' and ``dynamic behavior over graph''. One can think of dynamic behavior on graph as communication between nodes that happens via edges. Dynamic  behavior over graph can be think of as changes of graph as a whole over time. Intuitively, ``dynamic behavior on graph'' concerns micro (node/edges) levels while ``dynamic behavior over graph'' concern macro level --- concern graph as a whole. An example to emphasize on the difference, given that there exist a group of individuals, Evolution of individuals (nodes) ``role'' depends on when and how they interact. At the macro level, a member of a group may leave and join. This behavior also depends on time interval that experiment considers.
+
+Furthermore, design of models directly depend on dynamic behavior involved in dynamic graph. Hence, due to the factor mentioned above, it is very important to create an environment that is fair to make comparison between dynamic graph models. In addition to factor mentioned above, there are other factors that directly influence behavior on/over a graph including size of graph, node scale, et cetera, which beyond the scope of the paper. Empirical experiment has shown that combination of factors previously mentioned produces different temporal characteristic of dynamic graph either on/over the graph e.g. business property \cite{holme2012temporal} among other.
+
+Barros et al. \cite{barrosSurveyEmbeddingDynamic2021} categorized dynamic graph based on output embedding, model approaches, and dynamic behavior over graph.
+
+On the other than, Kazemi et al. \cite{kazemiRepresentationLearningDynamica} discuss in-depth mathematical formulation of encoder-decoder, one of many model approaches. The discussion also cover other types of models that are more specialized such as dynamic knowledge graph and spatio-temporal graph.
+
+Skarding et al. \cite{skardingFoundationsModelingDynamic2021} takes interesting approach to categorized dynamic graph based on edges duration into interaction networks, temporal networks, evolving networks, and strictly evolving networks. Futhermore, the paper classifies dynamic network models into statical models, stochastic actor oretied models, and dynamic network representation learning model. In comparison, Skarding et al. \cite{skardingFoundationsModelingDynamic2021} and Kazemi et al. \cite{kazemiRepresentationLearningDynamica} provides two different ways to categorize dynamic graph models. In contrast to Kazemi et al, Skarding et al. focus mainly on taxonomies of dynamic graph neural network including pseudo-dynamic model, edge-weighted model, discrete model, continuous models.
+
+Note that meaning of temporal networks is ambiguous outside of skarding et al's paper \cite{skardingFoundationsModelingDynamic2021} context. In ``Temporal Network'' paper, Holme et al. \cite{holme2012temporal} introduce ``time-respecting'' path as a property of temporal network. Graph with time-respect path contains edges whose weight value represents time when edges forms. Furthermore, all types of dynamic graph can be represented as a form of multilayer graph. \cite{kivela2014multilayer}
+
+\subsubsection{Dynamic Graph Modeling}
+\label{sec:org69eff1e}
+
+\subsection{Sliding Window Evaluation}
+\label{sec:org970a521}
+To the best of my knowledge, ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' \cite{skarding2021benchmarking} is the only paper that attempts to compare dynamic network based models using sliding window evaluation.
+
+
 \printbibliography
 \end{document}

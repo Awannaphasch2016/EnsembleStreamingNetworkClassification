@@ -6,6 +6,7 @@
     "kazemiRepresentationLearningDynamica"
     "skardingFoundationsModelingDynamic2021"
     "skarding2021benchmarking"
-    "networkmodelinandanalyticsforepidemic"))
+    "holme2012temporal"
+    "kivela2014multilayer"))
  :bibtex)
 
