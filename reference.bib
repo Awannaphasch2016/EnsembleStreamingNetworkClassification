@@ -1,68 +1,166 @@
 @article{barrosSurveyEmbeddingDynamic2021,
-  title = {A {{Survey}} on {{Embedding Dynamic Graphs}}},
-  author = {Barros, Claudio D. T. and Mendon{\c c}a, Matheus R. F. and Vieira, Alex B. and Ziviani, Artur},
-  year = {2021},
-  month = jan,
-  journal = {arXiv:2101.01229 [cs]},
-  eprint = {2101.01229},
-  eprinttype = {arxiv},
-  primaryclass = {cs},
-  abstract = {Embedding static graphs in low-dimensional vector spaces plays a key role in network analytics and inference, supporting applications like node classification, link prediction, and graph visualization. However, many real-world networks present dynamic behavior, including topological evolution, feature evolution, and diffusion. Therefore, several methods for embedding dynamic graphs have been proposed to learn network representations over time, facing novel challenges, such as time-domain modeling, temporal features to be captured, and the temporal granularity to be embedded. In this survey, we overview dynamic graph embedding, discussing its fundamentals and the recent advances developed so far. We introduce the formal definition of dynamic graph embedding, focusing on the problem setting and introducing a novel taxonomy for dynamic graph embedding input and output. We further explore different dynamic behaviors that may be encompassed by embeddings, classifying by topological evolution, feature evolution, and processes on networks. Afterward, we describe existing techniques and propose a taxonomy for dynamic graph embedding techniques based on algorithmic approaches, from matrix and tensor factorization to deep learning, random walks, and temporal point processes. We also elucidate main applications, including dynamic link prediction, anomaly detection, and diffusion prediction, and we further state some promising research directions in the area.},
-  archiveprefix = {arXiv},
-  keywords = {37E25 (Primary) 68T30; 05C62; 58D10 (Secondary),A.1,Computer Science - Artificial Intelligence,Computer Science - Machine Learning,I.2.6},
-  note = {Comment: 40 pages, 10 figures},
-  file = {/mnt/c/Users/terng/Zotero/storage/9HFG3744/Barros et al_2021_A Survey on Embedding Dynamic Graphs.pdf},
+  title           = {A {{Survey}} on {{Embedding Dynamic Graphs}}},
+  author          = {Barros, Claudio D. T. and Mendon{\c c}a, Matheus R. F. and
+                  Vieira, Alex B. and Ziviani, Artur},
+  year            = 2021,
+  month           = jan,
+  journal         = {arXiv:2101.01229 [cs]},
+  eprint          = {2101.01229},
+  eprinttype      = {arxiv},
+  primaryclass    = {cs},
+  abstract        = {Embedding static graphs in low-dimensional vector spaces
+                  plays a key role in network analytics and inference,
+                  supporting applications like node classification, link
+                  prediction, and graph visualization. However, many real-world
+                  networks present dynamic behavior, including topological
+                  evolution, feature evolution, and diffusion. Therefore,
+                  several methods for embedding dynamic graphs have been
+                  proposed to learn network representations over time, facing
+                  novel challenges, such as time-domain modeling, temporal
+                  features to be captured, and the temporal granularity to be
+                  embedded. In this survey, we overview dynamic graph embedding,
+                  discussing its fundamentals and the recent advances developed
+                  so far. We introduce the formal definition of dynamic graph
+                  embedding, focusing on the problem setting and introducing a
+                  novel taxonomy for dynamic graph embedding input and output.
+                  We further explore different dynamic behaviors that may be
+                  encompassed by embeddings, classifying by topological
+                  evolution, feature evolution, and processes on networks.
+                  Afterward, we describe existing techniques and propose a
+                  taxonomy for dynamic graph embedding techniques based on
+                  algorithmic approaches, from matrix and tensor factorization
+                  to deep learning, random walks, and temporal point processes.
+                  We also elucidate main applications, including dynamic link
+                  prediction, anomaly detection, and diffusion prediction, and
+                  we further state some promising research directions in the
+                  area.},
+  archiveprefix   = {arXiv},
+  keywords        = {37E25 (Primary) 68T30; 05C62; 58D10
+                  (Secondary),A.1,Computer Science - Artificial
+                  Intelligence,Computer Science - Machine Learning,I.2.6},
+  note            = {Comment: 40 pages, 10 figures},
+  file            = {/mnt/c/Users/terng/Zotero/storage/9HFG3744/Barros et
+                  al_2021_A Survey on Embedding Dynamic Graphs.pdf},
+}
+
+@article{holme2012temporal,
+  title           = {Temporal networks},
+  author          = {Holme, Petter and Saram{\"a}ki, Jari},
+  journal         = {Physics reports},
+  volume          = 519,
+  number          = 3,
+  pages           = {97--125},
+  year            = 2012,
+  publisher       = {Elsevier}
 }
 
 @article{kazemiRepresentationLearningDynamica,
-  title = {Representation Learning for Dynamic Graphs A Survey},
-  author = {Kazemi, Seyed Mehran and Goel, Rishab and Jain, Kshitij and Kobyzev, Ivan and Sethi, Akshay and Forsyth, Peter and Poupart, Pascal},
-  pages = {73},
-  abstract = {Graphs arise naturally in many real-world applications including social networks, recommender systems, ontologies, biology, and computational finance. Traditionally, machine learning models for graphs have been mostly designed for static graphs. However, many applications involve evolving graphs. This introduces important challenges for learning and inference since nodes, attributes, and edges change over time. In this survey, we review the recent advances in representation learning for dynamic graphs, including dynamic knowledge graphs. We describe existing models from an encoder-decoder perspective, categorize these encoders and decoders based on the techniques they employ, and analyze the approaches in each category. We also review several prominent applications and widely used datasets and highlight directions for future research.},
-  langid = {english},
-  file = {~/org/papers/Representation Learning for Dynamic Graphs A Survey.pdf},
-}
-
-@article{skardingFoundationsModelingDynamic2021,
-  title = {Foundations and {{Modeling}} of {{Dynamic Networks Using Dynamic Graph Neural Networks}}: {{A Survey}}},
-  shorttitle = {Foundations and {{Modeling}} of {{Dynamic Networks Using Dynamic Graph Neural Networks}}},
-  author = {Skarding, Joakim and Gabrys, Bogdan and Musial, Katarzyna},
-  year = {2021},
-  journal = {IEEE Access},
-  volume = {9},
-  pages = {79143--79168},
-  issn = {2169-3536},
-  doi = {10.1109/ACCESS.2021.3082932},
-  abstract = {Dynamic networks are used in a wide range of fields, including social network analysis, recommender systems and epidemiology. Representing complex networks as structures changing over time allow network models to leverage not only structural but also temporal patterns. However, as dynamic network literature stems from diverse fields and makes use of inconsistent terminology, it is challenging to navigate. Meanwhile, graph neural networks (GNNs) have gained a lot of attention in recent years for their ability to perform well on a range of network science tasks, such as link prediction and node classification. Despite the popularity of graph neural networks and the proven benefits of dynamic network models, there has been little focus on graph neural networks for dynamic networks. To address the challenges resulting from the fact that this research crosses diverse fields as well as to survey dynamic graph neural networks, this work is split into two main parts. First, to address the ambiguity of the dynamic network terminology we establish a foundation of dynamic networks with consistent, detailed terminology and notation. Second, we present a comprehensive survey of dynamic graph neural network models using the proposed terminology.},
-  langid = {english},
-  file = {C\:\\Users\\terng\\Zotero\\storage\\XQJ8XKNM\\Skarding et al. - 2021 - Foundations and Modeling of Dynamic Networks Using.pdf},
-}
-
-@article{skarding2021benchmarking,
-  title={Benchmarking Graph Neural Networks on Dynamic Link Prediction},
-  author={skarding, Joakim and Hellmich, Matthew and Gabrys, Bogdan and Musial-Gabrys, Katarzyna},
-  year={2021},
-}
-
-
-@article{holme2012temporal,
-  title={Temporal networks},
-  author={Holme, Petter and Saram{\"a}ki, Jari},
-  journal={Physics reports},
-  volume={519},
-  number={3},
-  pages={97--125},
-  year={2012},
-  publisher={Elsevier}
+  title           = {Representation Learning for Dynamic Graphs A Survey},
+  author          = {Kazemi, Seyed Mehran and Goel, Rishab and Jain, Kshitij and
+                  Kobyzev, Ivan and Sethi, Akshay and Forsyth, Peter and
+                  Poupart, Pascal},
+  pages           = 73,
+  abstract        = {Graphs arise naturally in many real-world applications
+                  including social networks, recommender systems, ontologies,
+                  biology, and computational finance. Traditionally, machine
+                  learning models for graphs have been mostly designed for
+                  static graphs. However, many applications involve evolving
+                  graphs. This introduces important challenges for learning and
+                  inference since nodes, attributes, and edges change over time.
+                  In this survey, we review the recent advances in
+                  representation learning for dynamic graphs, including dynamic
+                  knowledge graphs. We describe existing models from an
+                  encoder-decoder perspective, categorize these encoders and
+                  decoders based on the techniques they employ, and analyze the
+                  approaches in each category. We also review several prominent
+                  applications and widely used datasets and highlight directions
+                  for future research.},
+  langid          = {english},
+  file            = {~/org/papers/Representation Learning for Dynamic Graphs A
+                  Survey.pdf},
 }
 
 @article{kivela2014multilayer,
-  title={Multilayer networks},
-  author={Kivel{\"a}, Mikko and Arenas, Alex and Barthelemy, Marc and Gleeson, James P and Moreno, Yamir and Porter, Mason A},
-  journal={Journal of complex networks},
-  volume={2},
-  number={3},
-  pages={203--271},
-  year={2014},
-  publisher={Oxford University Press}
+  title           = {Multilayer networks},
+  author          = {Kivel{\"a}, Mikko and Arenas, Alex and Barthelemy, Marc and
+                  Gleeson, James P and Moreno, Yamir and Porter, Mason A},
+  journal         = {Journal of complex networks},
+  volume          = 2,
+  number          = 3,
+  pages           = {203--271},
+  year            = 2014,
+  publisher       = {Oxford University Press}
+}
+
+@article{skarding2021benchmarking,
+  title           = {Benchmarking Graph Neural Networks on Dynamic Link
+                  Prediction},
+  author          = {skarding, Joakim and Hellmich, Matthew and Gabrys, Bogdan
+                  and Musial-Gabrys, Katarzyna},
+  year            = 2021,
+}
+
+@article{skardingFoundationsModelingDynamic2021,
+  title           = {Foundations and {{Modeling}} of {{Dynamic Networks Using
+                  Dynamic Graph Neural Networks}}: {{A Survey}}},
+  shorttitle      = {Foundations and {{Modeling}} of {{Dynamic Networks Using
+                  Dynamic Graph Neural Networks}}},
+  author          = {Skarding, Joakim and Gabrys, Bogdan and Musial, Katarzyna},
+  year            = 2021,
+  journal         = {IEEE Access},
+  volume          = 9,
+  pages           = {79143--79168},
+  issn            = {2169-3536},
+  doi             = {10.1109/ACCESS.2021.3082932},
+  abstract        = {Dynamic networks are used in a wide range of fields,
+                  including social network analysis, recommender systems and
+                  epidemiology. Representing complex networks as structures
+                  changing over time allow network models to leverage not only
+                  structural but also temporal patterns. However, as dynamic
+                  network literature stems from diverse fields and makes use of
+                  inconsistent terminology, it is challenging to navigate.
+                  Meanwhile, graph neural networks (GNNs) have gained a lot of
+                  attention in recent years for their ability to perform well on
+                  a range of network science tasks, such as link prediction and
+                  node classification. Despite the popularity of graph neural
+                  networks and the proven benefits of dynamic network models,
+                  there has been little focus on graph neural networks for
+                  dynamic networks. To address the challenges resulting from the
+                  fact that this research crosses diverse fields as well as to
+                  survey dynamic graph neural networks, this work is split into
+                  two main parts. First, to address the ambiguity of the dynamic
+                  network terminology we establish a foundation of dynamic
+                  networks with consistent, detailed terminology and notation.
+                  Second, we present a comprehensive survey of dynamic graph
+                  neural network models using the proposed terminology.},
+  langid          = {english},
+  file            = {C\:\\Users\\terng\\Zotero\\storage\\XQJ8XKNM\\Skarding et
+                  al. - 2021 - Foundations and Modeling of Dynamic Networks
+                  Using.pdf},
+}
+
+@inproceedings{tian2021self,
+  title           = {Self-supervised Representation Learning on Dynamic Graphs},
+  author          = {Tian, Sheng and Wu, Ruofan and Shi, Leilei and Zhu, Liang
+                  and Xiong, Tao},
+  booktitle       = {Proceedings of the 30th ACM International Conference on
+                  Information \& Knowledge Management},
+  pages           = {1814--1823},
+  year            = 2021,
+  file            = {/home/awannaphasch2016/org/papers/self-supervised-representation-learning-on-dynamic-graphs.pdf},
+}
+
+@article{rossi2020temporal,
+  title={Temporal graph networks for deep learning on dynamic graphs},
+  author={Rossi, Emanuele and Chamberlain, Ben and Frasca, Fabrizio and Eynard, Davide and Monti, Federico and Bronstein, Michael},
+  journal={arXiv preprint arXiv:2006.10637},
+  year={2020},
+  file = {/home/awannaphasch2016/org/papers/temporal-graph-network-for-deep-learning-on-dynamic-graphs.pdf}
+}
+@inproceedings{trivedi2019dyrep,
+  title={Dyrep: Learning representations over dynamic graphs},
+  author={Trivedi, Rakshit and Farajtabar, Mehrdad and Biswal, Prasenjeet and Zha, Hongyuan},
+  booktitle={International conference on learning representations},
+  year={2019},
+  file = {/home/awannaphasch2016/org/papers/dyrep_learning_representations.pdf}
 }

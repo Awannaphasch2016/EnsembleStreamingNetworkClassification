@@ -3,10 +3,13 @@
  (lambda ()
    (LaTeX-add-bibitems
     "barrosSurveyEmbeddingDynamic2021"
-    "kazemiRepresentationLearningDynamica"
-    "skardingFoundationsModelingDynamic2021"
-    "skarding2021benchmarking"
     "holme2012temporal"
-    "kivela2014multilayer"))
+    "kazemiRepresentationLearningDynamica"
+    "kivela2014multilayer"
+    "skarding2021benchmarking"
+    "skardingFoundationsModelingDynamic2021"
+    "tian2021self"
+    "rossi2020temporal"
+    "trivedi2019dyrep"))
  :bibtex)
 
