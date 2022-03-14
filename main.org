@@ -32,13 +32,20 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 # What are brief results of the proposed design.
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
 
+** TODO insert ensemble framework images :ignore:
+get image from draw.io
+
 
 * Related Work
 ** Dynamic Graph
 :PROPERTIES:
 :ID:       13892178-9d6d-4add-8f7e-cfaf0a728a59
 :END:
-*** Taxonomy of Dynamic Graph
+*** Taxonomies of Dynamic Graph
+:PROPERTIES:
+:ID:       5239e60b-2a9b-4766-a361-d3f983e6eeb3
+:CUSTOM_ID: taxonomies of dynamic graph
+:END:
 # What are the types of dynamic graph?
 At the time of writing many taxonomies of dynamic graph models has been proposed.
 In this related work section, we will discuss previous attempts to categorize dynamic graph models into groups. Before discussing previous attempt, one should understand types of dynamic behavior that can affect dynamic graph models. There are two types of dynamic behaviors which are referred to in referenced literature by different names, nonetheless, we will refer to the two types as "dynamic behavior on graph" and "dynamic behavior over graph". One can think of dynamic behavior on graph as communication between nodes that happens via edges. Dynamic  behavior over graph can be think of as changes of graph as a whole over time. Intuitively, "dynamic behavior on graph" concerns micro (node/edges) levels while "dynamic behavior over graph" concern macro level --- concern graph as a whole. An example to emphasize on the difference, given that there exist a group of individuals, Evolution of individuals (nodes) "role" depends on when and how they interact. At the macro level, a member of a group may leave and join. This behavior also depends on time interval that experiment considers.
@@ -69,9 +76,11 @@ Sliding window is the basis of how to turn any time series dataset into a superv
 
 Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget.
 
-Furthermore, sequence of windows allows one to apply a higher level of abtraction over sequence of events which may influence models design. In this case, sliding window evaluation must be applied to all the models involve to create a fair comparison.
+Furthermore, sequence of windows allows one to apply a higher level of abstraction over sequence of events which may influence models design. In this case, sliding window evaluation must be applied to all the models involve to create a fair comparison.
 
-In the time of writing, dynamic graph model literature still uses simple train-val-test split as a model evaluation standards. We provide exaples of well accepted paper to make a point. Tian et al. [[cite:&tian2021self]] use 70-15-15 split to evaluate self-supervised learning on strictly evolving graph and compare with models. The comparison is limited to static graph models, and dynamic random walk. Similarly, using the same dataset, Rossi et al. [[cite:&rossi2020temporal]] also use 70-15-15 splits. Rossi et al. compare its own, temporal graph neural network (TGN) to one other dynamic graph, DyRep. The comparison is acceptable because same dataset is used in the experiment. Still, it is important to emphasize that in original paper, DyRep evaluate its performance on "interaction network" rather than "strictly evolving network". Influence on performance due to network types need to be further inspected. [[cite:&trivedi2019dyrep]]
+In the time of writing, dynamic graph model literature still uses simple train-val-test split as a model evaluation standards. We provide examples of well accepted paper to make a point. Tian et al. [[cite:&tian2021self]] use 70-15-15 split to evaluate self-supervised learning on strictly evolving graph and compare with models. Performance of models are evaluated based on two tasks: link prediction and node classification. The comparison is limited to static graph models, and dynamic random walk. Similarly, using the same dataset, Rossi et al. [[cite:&rossi2020temporal]] also use 70-15-15 splits. Rossi et al. compare its own, temporal graph neural network (TGN) to one other dynamic graph, DyRep. The comparison is acceptable because same dataset is used in the experiment. Dataset used in mentioned papers are collected as interaction network.
+
+It is very important to understand that how models receive data --- stream data, one instance at a time, or in batch --- implies underlying graph type. This is because it implies existence duration of nodes and edges which is used to classify dynamic graph based on taxonomies proposed by Skarding et al. [[cite:&skardingFoundationsModelingDynamic2021]]. For detail about taxonomies of dynamic graph can be found in [[#taxonomies of dynamic graph]] section.
 
 *** TODO what are ways in which papers evaluate their models? and how do they create a fair comparison within sliding window? :ignore:
 :PROPERTIES:
@@ -83,6 +92,25 @@ To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NE
 
 
 
+
+* Dataset
+:PROPERTIES:
+:ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
+:END:
+*Reddit dataset*: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table ref:Dataset.
+# where is the data frome?
+# show tables of data attribute
+
+
+#+NAME: Dataset
+|                            | Reddit  |
+| # Nodes                    | 11,000  |
+| # Edges                    | 672,447 |
+| # Edges Features           | 172     |
+| Timestapn                  | 1 month |
+| positive label percentages | 0.05 %  |
+
+* Results
 * Bibliography :ignore:
 :PROPERTIES:
 :ID:       308095ea-93bb-409e-ac4f-8da9f0d7839c
