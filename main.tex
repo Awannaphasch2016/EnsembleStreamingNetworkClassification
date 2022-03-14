@@ -1,4 +1,4 @@
-% Created 2022-03-14 Mon 02:31
+% Created 2022-03-14 Mon 03:25
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -23,7 +23,7 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:orgf86a45b}
+\label{sec:orge6ac7de}
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
 
@@ -40,11 +40,11 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 
 
 \section{Related Work}
-\label{sec:orgd5bfae2}
+\label{sec:org5e9eb4d}
 \subsection{Dynamic Graph}
-\label{sec:org93e4b95}
+\label{sec:orgb9f825b}
 \subsubsection{Taxonomy of Dynamic Graph}
-\label{sec:org287b15b}
+\label{sec:org2035fc6}
 At the time of writing many taxonomies of dynamic graph models has been proposed.
 In this related work section, we will discuss previous attempts to categorize dynamic graph models into groups. Before discussing previous attempt, one should understand types of dynamic behavior that can affect dynamic graph models. There are two types of dynamic behaviors which are referred to in referenced literature by different names, nonetheless, we will refer to the two types as ``dynamic behavior on graph'' and ``dynamic behavior over graph''. One can think of dynamic behavior on graph as communication between nodes that happens via edges. Dynamic  behavior over graph can be think of as changes of graph as a whole over time. Intuitively, ``dynamic behavior on graph'' concerns micro (node/edges) levels while ``dynamic behavior over graph'' concern macro level --- concern graph as a whole. An example to emphasize on the difference, given that there exist a group of individuals, Evolution of individuals (nodes) ``role'' depends on when and how they interact. At the macro level, a member of a group may leave and join. This behavior also depends on time interval that experiment considers.
 
@@ -59,10 +59,15 @@ Skarding et al. \cite{skardingFoundationsModelingDynamic2021} takes interesting 
 Note that meaning of temporal networks is ambiguous outside of skarding et al's paper \cite{skardingFoundationsModelingDynamic2021} context. In ``Temporal Network'' paper, Holme et al. \cite{holme2012temporal} introduce ``time-respecting'' path as a property of temporal network. Graph with time-respect path contains edges whose weight value represents time when edges forms. Furthermore, all types of dynamic graph can be represented as a form of multilayer graph. \cite{kivela2014multilayer}
 
 \subsubsection{Dynamic Graph Modeling}
-\label{sec:org69eff1e}
+\label{sec:org42b79fd}
 
 \subsection{Sliding Window Evaluation}
-\label{sec:org970a521}
+\label{sec:orgbf4234c}
+Sliding window is the basis of how to turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is a event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Because temporal properties of time window depends on window size and interval of time, evaluate performance based on sliding window show model's performance under various temporal condition, hence, performance of models cannot be manipulated.
+
+Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget.
+
+Furthermore, sequence of windows allows one to apply abtraction over sequence of events which may influence models design. In this case, sliding window evaluation must be applied to all the models involve to create a fair comparison.
 To the best of my knowledge, ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' \cite{skarding2021benchmarking} is the only paper that attempts to compare dynamic network based models using sliding window evaluation.
 
 
