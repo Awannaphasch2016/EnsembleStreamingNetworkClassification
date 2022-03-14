@@ -97,13 +97,17 @@ To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NE
 :PROPERTIES:
 :ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
 :END:
-*Reddit dataset*: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table ref:Dataset.
+*Reddit dataset*: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table [[ref:Datasets]].
 # where is the data frome?
 # show tables of data attribute
 
 
-#+NAME: Dataset
+#+NAME: Datasets
+#+CAPTION: Datasets
+|----------------------------+---------|
+|----------------------------+---------|
 |                            | Reddit  |
+|----------------------------+---------|
 | # Nodes                    | 11,000  |
 | # Edges                    | 672,447 |
 | # Edges Features           | 172     |
