@@ -32,11 +32,7 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 # What are brief results of the proposed design.
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
 
-** TODO insert ensemble framework images :ignore:
-get image from draw.io
-
-
-* Related Work
+* Related Work 
 ** Dynamic Graph
 :PROPERTIES:
 :ID:       13892178-9d6d-4add-8f7e-cfaf0a728a59
@@ -86,9 +82,7 @@ To the best of my knowledge, Skarding et al. wrote "BENCHMARKING GRAPH NEURAL NE
 
 Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters is essential for obtaining a representative score. This conclusion applies for both static and dynamic graph models. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
 
-
-
-
+*** TODO read and see if there are important detail that I can add to the paper. (benchmark paper, https://openreview.net/pdf?id=I2KAe7x67JU) :noexport:
 * Dataset
 :PROPERTIES:
 :ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
@@ -106,8 +100,75 @@ Performance of each model varies across metric score. Hence, the paper concludes
 | # Edges Features           | 172     |
 | Timestapn                  | 1 month |
 | positive label percentages | 0.05 %  |
+* Approaches 
+:PROPERTIES:
+:ID:       089297cd-a191-42fe-824e-21f3d297094b
+:END:
+
+#+NAME: parameters
+#+CAPTION: Parameters symbols and descriptions
+|------------------------+----------------------------+--------------------------------------------------------------|
+|------------------------+----------------------------+--------------------------------------------------------------|
+|                        | parameters                 | description                                                  |
+|------------------------+----------------------------+--------------------------------------------------------------|
+| window parameters      | $w_i$                      | i-th window                                                  |
+|                        | $ws$                       | window size                                                  |
+|                        | $\vert w \vert$            | number of window used during training                        |
+|                        | $bs$                       | batch size for a given window where $bs < ws$                |
+| temporal parameters    | $stride$                   | window stride                                                |
+|                        | $pred\_next_{n}$           | predict instances that are in window that is n window away.  |
+|                        | $keep\_last\_n$            | number of window to keep as window slides forward            |
+|                        | $total\_training_windows$  | total number of instances to be trained for                  |
+| ensemble parameters    | $E_i$                      | i-th model in ensemble                                       |
+|                        | $\vert E \vert$            | number of models used in ensemble                            |
+|                        | $\vert train\_w_{i} \vert$ | i-th window is the first window to begin training            |
+| granularity parameters | $PW$                       | granularity of prediction. Prediction length during training |
+
+#+name: window parameters
+#+CAPTION: window parameters
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_110302.png]]
+
+#+name: window parameters
+#+CAPTION: temporal parameters
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_120616.png]]
+
+#+name: window parameters
+#+CAPTION: granularity parameters
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_121434.png]]
+
+#+name: window parameters
+#+CAPTION: ensemble variation 1
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_124235.png]]
+
+#+name: window parameters
+#+CAPTION: ensemble variation 2
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_123955.png]]
+
+In sliding window evaluation setting, one need to make sure proposed model and benchmark model is being tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table ref:parameters provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
+
+According to ref:parameters, we categorize parameters of sliding window evaluation into four categories: windows parameters, temporal parameters, ensemble parameters, and granularity parameters.
+Window parameters and ensemble parameters are self-explanatory, but granularity parameters and temporal parameters need clarification. Granularity is determined by prediction length during training. This parameter is important because it tells the model to minimize its mistake for certain time interval. In the other word, a model whose prediction performance is optimized over 10 days will be different to model whose performance is optimized over one day. Larger model that is trained on larger granularity ignores short term stochasticity of temporal dependencies.
+
+It is important to note that temporal parameters can be applied "during ensemble formation" and "in-between ensemble formation." During ensemble formation referring to the modeling step where, given a fix set of training length, N number of individuals are trained before voting predictive score to finalize an ensemble performance. In contrast, in-between ensemble formation occurs after ensemble performance of the previous timestep is finalized and set of training instance is adjusted before it will be used to train an ensemble model of the next time step.
+
+In sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
+
+
+# add images for all paramters set.
+** TODO I need to draw pics to clarify :noexport:
+** TODO insert ensemble framework images :noexport:
+:PROPERTIES:
+:ID:       914d0489-cd9f-4a77-a369-c6c9a4779596
+:END:
+get image from draw.io
 
 * Results
+** TODO read my log file and get conclusion out of it :noexport:
 * Bibliography :ignore:
 :PROPERTIES:
 :ID:       308095ea-93bb-409e-ac4f-8da9f0d7839c
