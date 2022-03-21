@@ -1,4 +1,4 @@
-% Created 2022-03-21 Mon 12:43
+% Created 2022-03-21 Mon 13:09
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -23,7 +23,7 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:orgdb6452b}
+\label{sec:org904139c}
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
 
@@ -39,9 +39,9 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
 
 \section{Related Work}
-\label{sec:orgfcba84c}
+\label{sec:orgdcb7116}
 \subsection{Dynamic Graph}
-\label{sec:orgd82ad8e}
+\label{sec:org69040e0}
 \subsubsection{Taxonomies of Dynamic Graph}
 \label{taxonomies of dynamic graph}
 At the time of writing many taxonomies of dynamic graph models has been proposed.
@@ -57,10 +57,10 @@ Note that meaning of temporal networks is ambiguous outside of skarding et al's 
 
 
 \subsubsection{Dynamic Graph Modeling}
-\label{sec:orgaacc894}
+\label{sec:orgf6b2258}
 TGN,
 \subsection{Sliding Window Evaluation}
-\label{sec:org03541a5}
+\label{sec:orgaf0743f}
 Sliding window is the basis of how to turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is a event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Because temporal properties of time window depends on window size and interval of time, evaluate performance based on sliding window show model's performance under various temporal condition, hence, performance of models cannot be manipulated.
 
 Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget.
@@ -75,7 +75,7 @@ To the best of my knowledge, Skarding et al. wrote ``BENCHMARKING GRAPH NEURAL N
 
 Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters is essential for obtaining a representative score. This conclusion applies for both static and dynamic graph models. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
 \section{Dataset}
-\label{sec:org3e2401e}
+\label{sec:org3f81a04}
 \textbf{Reddit dataset}: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table \ref{Datasets}.
 
 \begin{table}[htbp]
@@ -94,7 +94,7 @@ positive label percentages & 0.05 \%\\
 \end{tabular}
 \end{table}
 \section{Approaches}
-\label{sec:orga6314fc}
+\label{sec:org309856c}
 \begin{table}[htbp]
 \caption{\label{parameters}Parameters symbols and descriptions}
 \centering
@@ -120,32 +120,39 @@ granularity parameters & \(PW\) & granularity of prediction. Prediction length d
 
 \begin{figure}[htbp]
 \centering
+\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_130824.png}
+\caption{\label{symbols}symbols}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_110302.png}
 \caption{\label{window parameters}window parameters}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_120616.png}
-\caption{\label{window parameters}temporal parameters}
+\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_130701.png}
+\caption{\label{temporal parameters}temporal parameters}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_121434.png}
-\caption{\label{window parameters}granularity parameters}
+\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_130720.png}
+\caption{\label{granularity parameters}granularity parameters}
 \end{figure}
+
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_124235.png}
-\caption{\label{window parameters}ensemble variation 1}
+\caption{\label{ensemble variation 1}ensemble variation 1}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_123955.png}
-\caption{\label{window parameters}ensemble variation 2}
+\includegraphics[width=.9\linewidth]{./images/screenshot_20220321_124707.png}
+\caption{\label{ensemble variation 2}ensemble variation 2}
 \end{figure}
 
 In sliding window evaluation setting, one need to make sure proposed model and benchmark model is being tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table \ref{parameters} provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
@@ -158,6 +165,6 @@ It is important to note that temporal parameters can be applied ``during ensembl
 In sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
 
 \section{Results}
-\label{sec:org0bc802a}
+\label{sec:org015b429}
 \printbibliography
 \end{document}

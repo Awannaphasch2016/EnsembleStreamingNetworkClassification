@@ -124,30 +124,36 @@ Performance of each model varies across metric score. Hence, the paper concludes
 |                        | $\vert train\_w_{i} \vert$ | i-th window is the first window to begin training            |
 | granularity parameters | $PW$                       | granularity of prediction. Prediction length during training |
 
+#+name: symbols
+#+CAPTION: symbols
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220321_130824.png]]
+
 #+name: window parameters
 #+CAPTION: window parameters
 #+attr_html: :width 500px
 [[file:./images/screenshot_20220321_110302.png]]
 
-#+name: window parameters
+#+name: temporal parameters
 #+CAPTION: temporal parameters
 #+attr_html: :width 500px
-[[file:./images/screenshot_20220321_120616.png]]
+[[file:./images/screenshot_20220321_130701.png]]
 
-#+name: window parameters
+#+name: granularity parameters
 #+CAPTION: granularity parameters
 #+attr_html: :width 500px
-[[file:./images/screenshot_20220321_121434.png]]
+[[file:./images/screenshot_20220321_130720.png]]
 
-#+name: window parameters
+
+#+name: ensemble variation 1
 #+CAPTION: ensemble variation 1
 #+attr_html: :width 500px
 [[file:./images/screenshot_20220321_124235.png]]
 
-#+name: window parameters
+#+name: ensemble variation 2
 #+CAPTION: ensemble variation 2
 #+attr_html: :width 500px
-[[file:./images/screenshot_20220321_123955.png]]
+[[file:./images/screenshot_20220321_124707.png]]
 
 In sliding window evaluation setting, one need to make sure proposed model and benchmark model is being tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table ref:parameters provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
 
