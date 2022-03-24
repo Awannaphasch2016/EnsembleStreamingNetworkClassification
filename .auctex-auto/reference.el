@@ -10,6 +10,10 @@
     "skardingFoundationsModelingDynamic2021"
     "tian2021self"
     "rossi2020temporal"
-    "trivedi2019dyrep"))
+    "trivedi2019dyrep"
+    "kapoor2020examining"
+    "wijayanto2018learning"
+    "meirom2021controlling"
+    "wijayanto2019effective"))
  :bibtex)
 

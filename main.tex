@@ -1,4 +1,4 @@
-% Created 2022-03-21 Mon 13:09
+% Created 2022-03-24 Thu 11:14
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -23,14 +23,18 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:org904139c}
+\label{sec:orge597cc3}
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
+
+Many real world problems involve entities and their relationship. This is best represented by graph data structures. In the case where graphs evolve overtimes, dynamic graph can be used to model them. This phenomenon is observed all the time. For example, relationship between species in an ecosystem and communication between computer in distributed computing, among others.
+
+More related to the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more in the past few years. Reinforcement learning was used to solve graph protection problems on dynamic graph \cite{wijayanto2018learning,wijayanto2019effective}. Meirom at el. \cite{meirom2021controlling} uses graph neural network to propagate information and reinforcement learning to rank highly infectious candidate. As of recently, during the Covid-19 pandemic, Kapoor et al. \cite{kapoor2020examining}  applies graph neural network on mobility data, which is represented as dynamic graph data, to predict code cases.
 
 In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network).
 The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
 
-Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph.)
+Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph)
 
 Currently, in the field of machine learning on dynamic network, simply train-test split is used to conclude models performance. This is not a good idea because dynamic network data is a sequential data. It is more appropriate to use sliding window evaluation. Sliding window evaluation is a well known technique that is a gold standard for sequential data such as time series data. Furthermore, we found that models capacity directly depends on sliding window parameters such as window size, epoch per window etc. Therefore, without adopting sliding window evaluation as a standard to evaluate performance of dynamic network, one cannot create a fair environment to compare performance between dynamic network based models.
 For this reason, in this paper, we adopt window sliding window evaluation to evaluate link prediction and node classification using dynamic network as input.
@@ -39,9 +43,9 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
 
 \section{Related Work}
-\label{sec:orgdcb7116}
+\label{sec:org82fa8dc}
 \subsection{Dynamic Graph}
-\label{sec:org69040e0}
+\label{sec:orgfae88e2}
 \subsubsection{Taxonomies of Dynamic Graph}
 \label{taxonomies of dynamic graph}
 At the time of writing many taxonomies of dynamic graph models has been proposed.
@@ -54,13 +58,11 @@ Barros et al. \cite{barrosSurveyEmbeddingDynamic2021} categorized dynamic graph 
 Skarding et al. \cite{skardingFoundationsModelingDynamic2021} takes interesting approach to categorized dynamic graph based on edges duration into interaction networks, temporal networks, evolving networks, and strictly evolving networks. Futhermore, the paper classifies dynamic network models into statical models, stochastic actor oretied models, and dynamic network representation learning model. In comparison, Skarding et al. \cite{skardingFoundationsModelingDynamic2021} and Kazemi et al. \cite{kazemiRepresentationLearningDynamica} provides two different ways to categorize dynamic graph models. In contrast to Kazemi et al, Skarding et al. focus mainly on taxonomies of dynamic graph neural network including pseudo-dynamic model, edge-weighted model, discrete model, continuous models.
 
 Note that meaning of temporal networks is ambiguous outside of skarding et al's paper \cite{skardingFoundationsModelingDynamic2021} context. In ``Temporal Network'' paper, Holme et al. \cite{holme2012temporal} introduce ``time-respecting'' path as a property of temporal network. Graph with time-respect path contains edges whose weight value represents time when edges forms. We will adopt taxonomy presented in \cite{skardingFoundationsModelingDynamic2021} because including adopting temporal network definition. This is unambiguous because time-respecting path has not explored at all in the machine learning at the time of writing. Furthermore, all types of dynamic graph can be represented as a form of multilayer graph. \cite{kivela2014multilayer}
-
-
 \subsubsection{Dynamic Graph Modeling}
-\label{sec:orgf6b2258}
+\label{sec:org6675553}
 TGN,
 \subsection{Sliding Window Evaluation}
-\label{sec:orgaf0743f}
+\label{sec:orgdb57e67}
 Sliding window is the basis of how to turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is a event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Because temporal properties of time window depends on window size and interval of time, evaluate performance based on sliding window show model's performance under various temporal condition, hence, performance of models cannot be manipulated.
 
 Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget.
@@ -74,27 +76,8 @@ It is very important to understand that how models receive data --- stream data,
 To the best of my knowledge, Skarding et al. wrote ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' \cite{skarding2021benchmarking} which is the only paper to compare dynamic network based models using sliding window evaluation. Directed and undirected interaction network is used. Interaction network can be easily aggregated to form ``graph snapshot.'' Hence, using interaction network, one can pass in continuous network to continuous model and discrete network to discrete models.
 
 Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters is essential for obtaining a representative score. This conclusion applies for both static and dynamic graph models. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
-\section{Dataset}
-\label{sec:org3f81a04}
-\textbf{Reddit dataset}: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table \ref{Datasets}.
-
-\begin{table}[htbp]
-\caption{\label{Datasets}Datasets}
-\centering
-\begin{tabular}{ll}
-\hline
-\hline
- & Reddit\\
-\hline
-\# Nodes & 11,000\\
-\# Edges & 672,447\\
-\# Edges Features & 172\\
-Timestapn & 1 month\\
-positive label percentages & 0.05 \%\\
-\end{tabular}
-\end{table}
 \section{Approaches}
-\label{sec:org309856c}
+\label{sec:orgd94898f}
 \begin{table}[htbp]
 \caption{\label{parameters}Parameters symbols and descriptions}
 \centering
@@ -113,7 +96,7 @@ temporal parameters & \(stride\) & window stride\\
  & \(total\_training_windows\) & total number of instances to be trained for\\
 ensemble parameters & \(E_i\) & i-th model in ensemble\\
  & \(\vert E \vert\) & number of models used in ensemble\\
- & \(\vert train\_w_{i} \vert\) & i-th window is the first window to begin training\\
+ & \(train\_w_{i}\) & i-th window is the first window to begin training\\
 granularity parameters & \(PW\) & granularity of prediction. Prediction length during training\\
 \end{tabular}
 \end{table}
@@ -127,44 +110,66 @@ granularity parameters & \(PW\) & granularity of prediction. Prediction length d
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_110302.png}
-\caption{\label{window parameters}window parameters}
+\caption{\label{window_parameters}window parameters}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_130701.png}
-\caption{\label{temporal parameters}temporal parameters}
+\caption{\label{temporal_parameters}temporal parameters}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_130720.png}
-\caption{\label{granularity parameters}granularity parameters}
+\caption{\label{granularity_parameters}granularity parameters}
 \end{figure}
 
+
+In sliding window evaluation setting, one needs to make sure proposed model and benchmark model is being tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table \ref{parameters} provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
+
+According to Table \ref{parameters}, we categorize parameters of sliding window evaluation into four categories: windows parameters, temporal parameters, ensemble parameters, and granularity parameters.
+Window parameters and ensemble parameters are self-explanatory, but granularity parameters and temporal parameters need clarification.
+Granularity is determined by prediction length during training. This parameter is important because it tells the model to minimize its mistake for certain time interval. In the other word, a model whose prediction performance is optimized over 10 days will be different to model whose performance is optimized over one day. Larger model that is trained on larger granularity ignores short term stochasticity of temporal dependencies. Illustration of window parameters, temporal parameters, granularity parameters groups are provided in Figure \ref{window_parameters}, \ref{temporal_parameters}, and \ref{granularity_parameters}. Symbols used in figures followed Figure \ref{symbols}.
+
+It is important to note that temporal parameters can be applied ``during ensemble formation'' and ``in-between ensemble formation.'' During ensemble formation referring to the modeling step where, given a fix set of training length, N number of individuals are trained before voting predictive score to finalize an ensemble performance. In contrast, in-between ensemble formation occurs after ensemble performance of the previous timestep is finalized and set of training instance is adjusted before it will be used to train an ensemble model of the next time step.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_124235.png}
-\caption{\label{ensemble variation 1}ensemble variation 1}
+\caption{\label{ensemble_variation_1}ensemble variation 1}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220321_124707.png}
-\caption{\label{ensemble variation 2}ensemble variation 2}
+\caption{\label{ensemble_variation_2}ensemble variation 2}
 \end{figure}
 
-In sliding window evaluation setting, one need to make sure proposed model and benchmark model is being tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table \ref{parameters} provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
+Using sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
 
-According to \ref{parameters}, we categorize parameters of sliding window evaluation into four categories: windows parameters, temporal parameters, ensemble parameters, and granularity parameters.
-Window parameters and ensemble parameters are self-explanatory, but granularity parameters and temporal parameters need clarification. Granularity is determined by prediction length during training. This parameter is important because it tells the model to minimize its mistake for certain time interval. In the other word, a model whose prediction performance is optimized over 10 days will be different to model whose performance is optimized over one day. Larger model that is trained on larger granularity ignores short term stochasticity of temporal dependencies.
+\subsection{{\bfseries\sffamily TODO} use pseudocode to describe.}
+\label{sec:org42290af}
+\section{Dataset}
+\label{sec:org82c0e87}
+\textbf{Reddit dataset}: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table \ref{Datasets}.
 
-It is important to note that temporal parameters can be applied ``during ensemble formation'' and ``in-between ensemble formation.'' During ensemble formation referring to the modeling step where, given a fix set of training length, N number of individuals are trained before voting predictive score to finalize an ensemble performance. In contrast, in-between ensemble formation occurs after ensemble performance of the previous timestep is finalized and set of training instance is adjusted before it will be used to train an ensemble model of the next time step.
-
-In sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
-
+\begin{table}[htbp]
+\caption{\label{Datasets}Datasets}
+\centering
+\begin{tabular}{ll}
+\hline
+\hline
+ & Reddit\\
+\hline
+\# Nodes & 11,000\\
+\# Edges & 672,447\\
+\# Edges Features & 172\\
+Timestapn & 1 month\\
+positive label percentages & 0.05 \%\\
+\end{tabular}
+\end{table}
 \section{Results}
-\label{sec:org015b429}
+\label{sec:org51f6394}
 \printbibliography
 \end{document}
