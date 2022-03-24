@@ -11,22 +11,24 @@
 :PROPERTIES:
 :ID:       32be6ae3-6af3-49d0-9edb-b2009b3f6e42
 :END:
-# Start to draw a system framework, which shows the complete framework of your ensemble approach for streaming graph prediction.
 
 # What are streaming graphs (dynamic nodes, edges et.c)? what are streaming graphs applications? Why streaming graphs are important
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies [[cite:&barrosSurveyEmbeddingDynamic2021;&kazemiRepresentationLearningDynamica;&skardingFoundationsModelingDynamic2021]].
 
-# We will use streaming graph and dynamic graph interchangeably in the paper.
 Many real world problems involve entities and their relationship. This is best represented by graph data structures. In the case where graphs evolve overtimes, dynamic graph can be used to model them. This phenomenon is observed all the time. For example, relationship between species in an ecosystem and communication between computer in distributed computing, among others.
 
-More related to the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more in the past few years. Reinforcement learning was used to solve graph protection problems on dynamic graph [[cite:&wijayanto2018learning;&wijayanto2019effective]]. Meirom at el. [[cite:&meirom2021controlling]] uses graph neural network to propagate information and reinforcement learning to rank highly infectious candidate. As of recently, during the Covid-19 pandemic, Kapoor et al. [[cite:&kapoor2020examining]]  applies graph neural network on mobility data, which is represented as dynamic graph data, to predict code cases.
+More related to the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more in the past few years. Applications involve tasks such as graph protection, link prediction, entity/relation prediction, time prediction, node classification, and node regression [[cite:&kazemiRepresentationLearningDynamica]]. Actual application involves traffic prediction [[cite:&yuanSurveyTrafficPrediction2021]], recommendation system, and knowledge graph completion. Reinforcement learning was used to solve graph protection problems on dynamic graph [[cite:&wijayanto2018learning;&wijayanto2019effective]]. Meirom at el. [[cite:&meirom2021controlling]] uses graph neural network to propagate information and reinforcement learning to rank highly infectious candidate. As of recently, during the Covid-19 pandemic, Kapoor et al. [[cite:&kapoor2020examining]]  applies graph neural network on mobility data, which is represented as dynamic graph data, to predict state, represented as node, cases. This tasks of task to predict node's value is called node regression task.
 
 # For static graph (no streaming or changing edges), what are typical link prediction or node classification solutions. What are challenges, if network is dynamically changing?
-In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network).
-The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
+In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network). The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
 
-Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph)
+Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph) Furthermore, it is empirically observed that some phenomenon only appears in dynamic network setting, such as bustiness property.
+
+# What are typical link prediction and node classification solution.
+In general, performance between dynamic network based models are compared based on two main tasks link prediction and node classification. Innovation of dynamic graph aspect of dynamic graph based models can be categorized into encoder and decoder [[cite:&kazemiRepresentationLearningDynamica]].
+
+The most traditional way to implement models for dynamic network data is to extend static network models.
 
 # For streaming graphs, what are analytics objective (or learning objective)? E.g., node classification, link prediction?
 
@@ -37,7 +39,17 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 
 # What are brief results of the proposed design.
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
+
 ** TODO make introduction be a full 1 page. :noexport:
+*** TODO what are typical link prediction and node classification solution for static graph
+:PROPERTIES:
+:ID:       8588cfb4-dd0b-46ce-931b-f405b018bb00
+:END:
+*** TODO what are typical link prediction and node classification solution for dynamic graph
+****  give example of dynamic network models (read and summaries.)
+***** look through dynamic graph survey books.
+what are dynamic graph survey (search through my paper)
+****  mention that self supervised learning has also been done.
 
 * Related Work 
 ** Dynamic Graph
@@ -53,7 +65,7 @@ The paper analyze multiple ensemble approaches which can only be adopted via sli
 At the time of writing many taxonomies of dynamic graph models has been proposed.
 In this related work section, we will discuss previous attempts to categorize dynamic graph models into groups. Before discussing previous attempt, one should understand types of dynamic behavior that can affect dynamic graph models. There are two types of dynamic behaviors which are referred to in referenced literature by different names, nonetheless, we will refer to the two types as "dynamic behavior on graph" and "dynamic behavior over graph". One can think of dynamic behavior on graph as communication between nodes that happens via edges. Dynamic  behavior over graph can be think of as changes of graph as a whole over time. Intuitively, "dynamic behavior on graph" concerns micro (node/edges) levels while "dynamic behavior over graph" concern macro level --- concern graph as a whole. An example to emphasize on the difference, given that there exist a group of individuals, Evolution of individuals (nodes) "role" depends on when and how they interact. At the macro level, a member of a group may leave and join. This behavior also depends on time interval that experiment considers.
 
-Furthermore, design of models directly depend on dynamic behavior involved in dynamic graph. Hence, due to the factor mentioned above, it is very important to create an environment that is fair to make comparison between dynamic graph models. In addition to factor mentioned above, there are other factors that directly influence behavior on/over a graph including size of graph, node scale, et cetera, which beyond the scope of the paper. Empirical experiment has shown that combination of factors previously mentioned produces different temporal characteristic of dynamic graph either on/over the graph e.g. business property cite:&holme2012temporal among other.
+Furthermore, design of models directly depend on dynamic behavior involved in dynamic graph. Hence, due to the factor mentioned above, it is very important to create an environment that is fair to make comparison between dynamic graph models. In addition to factor mentioned above, there are other factors that directly influence behavior on/over a graph including size of graph, node scale, et cetera, which beyond the scope of the paper. Empirical experiment has shown that combination of factors previously mentioned produces different temporal characteristic of dynamic graph either on/over the graph e.g. bustiness property cite:&holme2012temporal among other.
 
 # What exactly is the differences?
 # what types of taxonomies is proposed?

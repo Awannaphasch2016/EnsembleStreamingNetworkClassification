@@ -14,6 +14,7 @@
     "kapoor2020examining"
     "wijayanto2018learning"
     "meirom2021controlling"
-    "wijayanto2019effective"))
+    "wijayanto2019effective"
+    "yuanSurveyTrafficPrediction2021"))
  :bibtex)
 
