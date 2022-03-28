@@ -22,6 +22,9 @@
     "kipf2016semi"
     "scarselli2008graph"
     "seo2018structured"
-    "hamilton2017inductive"))
+    "hamilton2017inductive"
+    "xu2019generative"
+    "kipf2016variational"
+    "qu2020continuous"))
  :bibtex)
 
