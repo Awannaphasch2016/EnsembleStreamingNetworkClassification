@@ -27,12 +27,13 @@ In static network, one must consider type of network relationship (e.g idealize 
 
 Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph) Furthermore, it is empirically observed that some phenomenon only appears in dynamic network setting, such as bustiness property.
 
-** For streaming graphs, what are analytics objective (or learning objective)? E.g., node classification, link prediction?
+** For streaming graphs, what are analytics objective (or learning objective)? E.g., node classification, link prediction? :ignore:
 In general, performance between dynamic network based models are compared based on two main tasks link prediction and node classification. This is because these tasks are downstream task that can be tested on off-the-shelf approach. In static graph, link prediction task goal is to predict existence of pre-existence edges. On the other hand, according to Barros et al.  [[cite:&barrosSurveyEmbeddingDynamic2021]], link prediction on dynamic graph task can be categorized into temporal link prediction and link completion. Similar to link prediction on static graph, link completion predicts existence of pre-existence edges at timestep $t$. Temporal link prediction task, on the other hands, predict new edges. In this paper, we evaluate models on temporal link prediction tasks.
 
 Previous attempt of dynamic graph tasks include extending static network models. Gu et al. [[cite:&qu2020continuous]] construct dynamic graph input into stack of weighted static graph by aggregating graph within fixed interval and feed the input to modified GCN model. TGAT was the first continuous DGNN to encode time by utilizing functional time embedding similar to time2vec. TGAT use information retrieval based attention parameterize by query, key, value --- first proposed by transformer [[cite:&vaswani2017attention]].
 
-# what are dataset that of these node prediction
+** what are dataset that of these node prediction :ignore:
+Dynamic node classification are less common compared to dynamic link prediction. This is because popular dataset for dynamic network tasks doesn't consider node labels. Dataset such as Reddit data, that are used in the paper, provided node labels, but it is highly imbalance. In Dataset section, we will discuss the reproducible approach to create node labels for Reddit data.
 
 
 ** What are typical link prediction and node classification solution. :ignore:
