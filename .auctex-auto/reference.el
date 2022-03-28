@@ -15,6 +15,13 @@
     "wijayanto2018learning"
     "meirom2021controlling"
     "wijayanto2019effective"
-    "yuanSurveyTrafficPrediction2021"))
+    "yuanSurveyTrafficPrediction2021"
+    "cai2022temporal"
+    "junuthula2016evaluating"
+    "defferrard2016convolutional"
+    "kipf2016semi"
+    "scarselli2008graph"
+    "seo2018structured"
+    "hamilton2017inductive"))
  :bibtex)
 

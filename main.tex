@@ -1,4 +1,4 @@
-% Created 2022-03-24 Thu 11:44
+% Created 2022-03-28 Mon 09:43
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -23,28 +23,22 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:orgd19c519}
+\label{sec:orgabaa8c5}
 Dynamic graph is a vaguely used term. In general, dynamic graph is an ordered list of node and link events. These events include deletion and addition of nodes and edges after a interval of time.
 Dynamic graph is known in other named as streaming graph and temporal graph. Concretely, dynamic graph can be categorized into taxonomies. A few embedding dynamic network surveys have attempted to provide these taxonomies \cite{barrosSurveyEmbeddingDynamic2021,kazemiRepresentationLearningDynamica,skardingFoundationsModelingDynamic2021}.
 
 Many real world problems involve entities and their relationship. This is best represented by graph data structures. In the case where graphs evolve overtimes, dynamic graph can be used to model them. This phenomenon is observed all the time. For example, relationship between species in an ecosystem and communication between computer in distributed computing, among others.
 
-More related to the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more in the past few years. Reinforcement learning was used to solve graph protection problems on dynamic graph \cite{wijayanto2018learning,wijayanto2019effective}. Meirom at el. \cite{meirom2021controlling} uses graph neural network to propagate information and reinforcement learning to rank highly infectious candidate. As of recently, during the Covid-19 pandemic, Kapoor et al. \cite{kapoor2020examining}  applies graph neural network on mobility data, which is represented as dynamic graph data, to predict code cases.
+More related to the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more in the past few years. Applications involve tasks such as graph protection, link prediction, entity/relation prediction, time prediction, node classification, and node regression, just to name a few \cite{kazemiRepresentationLearningDynamica}. Actual application involves traffic prediction \cite{yuanSurveyTrafficPrediction2021}, recommendation system \cite{kazemiRepresentationLearningDynamica}, and knowledge graph completion \cite{cai2022temporal}. Reinforcement learning was used to solve graph protection problems on dynamic graph \cite{wijayanto2018learning,wijayanto2019effective}. Meirom at el. \cite{meirom2021controlling} uses graph neural network to propagate information and reinforcement learning to rank highly infectious candidate. As of recently, during the Covid-19 pandemic, Kapoor et al. \cite{kapoor2020examining}  applies graph neural network on mobility data, which is represented as dynamic graph data, to predict state, represented as node, cases. This tasks of task to predict node's value is called node regression task.
 
 In static network, one must consider type of network relationship (e.g idealize network, proximity network.), scale of network (e.g. a node as a single entity, a node as a group of entities.), and network variation (e.g. homogenous network, heterogenous network, multilayer network). The mentioned factors provide unique challenges. These factors must be considered before model designing phase starts otherwise network based models cannot be compared fairly. Moreover, it provide mental framework to guide designing process.
 
 Dynamic graph extends static graph to include time variables. This add more degree of freedom to the problem. Additional degree of freedom include network status (how is information about network aggregated over time.), dynamic behavior on graph (communication behavior between nodes) and graph evolution. (structure,features,role evolution of a graph) Furthermore, it is empirically observed that some phenomenon only appears in dynamic network setting, such as bustiness property.
 
-Currently, in the field of machine learning on dynamic network, simply train-test split is used to conclude models performance. This is not a good idea because dynamic network data is a sequential data. It is more appropriate to use sliding window evaluation. Sliding window evaluation is a well known technique that is a gold standard for sequential data such as time series data. Furthermore, we found that models capacity directly depends on sliding window parameters such as window size, epoch per window etc. Therefore, without adopting sliding window evaluation as a standard to evaluate performance of dynamic network, one cannot create a fair environment to compare performance between dynamic network based models.
-For this reason, in this paper, we adopt window sliding window evaluation to evaluate link prediction and node classification using dynamic network as input.
-The paper analyze multiple ensemble approaches which can only be adopted via sliding window evaluation. This provides another tool to be used within dynamic graph environment.
-
-[What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
-
 \section{Related Work}
-\label{sec:org628d422}
+\label{sec:org44f8a8c}
 \subsection{Dynamic Graph}
-\label{sec:org562bc02}
+\label{sec:orgb9666f4}
 \subsubsection{Taxonomies of Dynamic Graph}
 \label{taxonomies of dynamic graph}
 At the time of writing many taxonomies of dynamic graph models has been proposed.
@@ -58,11 +52,22 @@ Skarding et al. \cite{skardingFoundationsModelingDynamic2021} takes interesting 
 
 Note that meaning of temporal networks is ambiguous outside of skarding et al's paper \cite{skardingFoundationsModelingDynamic2021} context. In ``Temporal Network'' paper, Holme et al. \cite{holme2012temporal} introduce ``time-respecting'' path as a property of temporal network. Graph with time-respect path contains edges whose weight value represents time when edges forms. We will adopt taxonomy presented in \cite{skardingFoundationsModelingDynamic2021} because including adopting temporal network definition. This is unambiguous because time-respecting path has not explored at all in the machine learning at the time of writing. Furthermore, all types of dynamic graph can be represented as a form of multilayer graph. \cite{kivela2014multilayer}
 \subsubsection{Dynamic Graph Modeling}
-\label{sec:orgf5efc63}
-TGN,
+\label{sec:org266cebd}
+Around 2016, deep learning solution of dynamic graph had been explored. Firstly, literature explored methods of aggregating information (e.g. tree like structure, grid like structure) from node neighbor with varying weight. Furthermore, RNN had been used to explore temporal features while CNN and GNN had been used to explore ``spatial'' features. Note that 2016 is around the peak of RNN hype. Next is the development of convolution filters. Literature has tried to generalized convolution filter by generalized CNN grid filter for graph input. This only works for specific kind of graph that modified CNN grid is generalized for. Another way to explore convolution filter is to convert graph from spatial domain into frequency domain or Fourier domain. Filter in Fourier in domain is called spectral filter proposed by Defferard et al. \cite{defferrard2016convolutional} by using K-localized convolutional neural network on graph.
+
+
+Based on \cite{defferrard2016convolutional}, Kipf el at. \cite{kipf2016semi} purposed GCN where K is 1 and approximation of convolution filter is not learned by neural network rather than explicitly parameterize with Chebyshev approximation.
+
+Creation of GCN reignite interest of GNN architecture \cite{scarselli2008graph}, which was purposed back in 2009.
+
+
+
+
+stack or integrate LSTM layer on top of spatial models
 \subsection{Sliding Window Evaluation}
-\label{sec:org400611e}
-Sliding window is the basis of how to turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is a event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Because temporal properties of time window depends on window size and interval of time, evaluate performance based on sliding window show model's performance under various temporal condition, hence, performance of models cannot be manipulated.
+\label{sec:org7fedb06}
+\subsubsection{{\bfseries\sffamily TODO} Sliding window approaches turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is an event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Mathematically, consider dynamic networks observed at discrete time steps, \(1,2,...,T\). For each \(t = 1,...,T\), one trains model on window \(w_{t}\) where \(t=1,2,...,T-1\) to predict score of \(w_{\hat t}\) where \(\hat t=2,3,...,T\), respectively. Because temporal properties of time window, \(w\), depends on window size, \(ws\), and interval of time, \(\Delta t\), evaluating performance based on sliding window approach show model's performance under various temporal condition, such as temporal frequency, seasonality, cycles (business cycles, economy cycle, war, etc), serial correlation, hence, comparison between models are not fair without considering appropriate sliding window parameters.}
+\label{sec:org22d8c23}
 
 Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget.
 
@@ -76,7 +81,7 @@ To the best of my knowledge, Skarding et al. wrote ``BENCHMARKING GRAPH NEURAL N
 
 Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters is essential for obtaining a representative score. This conclusion applies for both static and dynamic graph models. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
 \section{Approaches}
-\label{sec:orga707cf5}
+\label{sec:org894fad8}
 \begin{table}[htbp]
 \caption{\label{parameters}Parameters symbols and descriptions}
 \centering
@@ -146,11 +151,8 @@ It is important to note that temporal parameters can be applied ``during ensembl
 \end{figure}
 
 Using sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
-
-\subsection{{\bfseries\sffamily TODO} use pseudocode to describe.}
-\label{sec:org5a67c96}
 \section{Dataset}
-\label{sec:org71d2ebb}
+\label{sec:org6573d46}
 \textbf{Reddit dataset}: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table \ref{Datasets}.
 
 \begin{table}[htbp]
@@ -169,6 +171,6 @@ positive label percentages & 0.05 \%\\
 \end{tabular}
 \end{table}
 \section{Results}
-\label{sec:org81f2ca3}
+\label{sec:orge5bf07e}
 \printbibliography
 \end{document}
