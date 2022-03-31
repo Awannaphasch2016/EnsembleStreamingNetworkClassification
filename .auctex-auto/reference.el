@@ -26,6 +26,7 @@
     "xu2019generative"
     "kipf2016variational"
     "qu2020continuous"
-    "vaswani2017attention"))
+    "vaswani2017attention"
+    "holme2015modern"))
  :bibtex)
 
