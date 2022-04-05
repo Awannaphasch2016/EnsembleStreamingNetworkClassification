@@ -27,6 +27,8 @@
     "kipf2016variational"
     "qu2020continuous"
     "vaswani2017attention"
-    "holme2015modern"))
+    "holme2015modern"
+    "gilmer2017neural"
+    "beutel2018latent"))
  :bibtex)
 
