@@ -29,6 +29,7 @@
     "vaswani2017attention"
     "holme2015modern"
     "gilmer2017neural"
-    "beutel2018latent"))
+    "beutel2018latent"
+    "wanna2022network"))
  :bibtex)
 
