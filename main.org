@@ -196,11 +196,19 @@ Raw message is introduced as a parameters that provide necessary information to 
 #+attr_html: :width 500px
 [[file:./images/screenshot_20220405_133740.png]]
 
-*** TODO add caption to TGN implementation picture
+*** TODO add caption to TN implementation picture
 ** Sliding Window Evaluation
 :PROPERTIES:
 :ID:       393d96b8-e5b6-40ea-949c-d21cc3daacbb
 :END:
+
+#+name: dynamic-graph-diagram
+#+CAPTION: At the bottom box, dynamic graph diagram denote node/edge creation and deletion notation. The top box, dynamic graph, shows events that happens in the dynamic graph.
+#+attr_html: :width 500px
+[[file:images/dynamic-graph-diagram.png][dynamic graph diagram]]
+
+Figure. ref:dynamic-graph-diagram illustrate dynamic graph. This helps visualize sliding window on dynamic graph setting which we discuss in this section. In Figure ref:dynamic-graph-diagram, Dynamic graph diagram box denotes edge/node deletion and edge/node creation notation while the dynamic graph box at the top illustrate events that happens to the dynamic graph. Node creation is represented as the beginning of the thick horizontal line while the end of the line represent node deletion. Horizontal lines represent edges creation event. Arrow head of the horizontal line is direction of flow of edge event. No arrow means event can flow both way. Existence of edge event are represented as length of horizontal line attaches to horizontal line.
+
 Sliding window approaches turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is an event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Mathematically, consider dynamic networks observed at discrete time steps, $1,2,...,T$. For each $t = 1,...,T$, one trains model on window $w_{t}$ where $t=1,2,...,T-1$ to predict score of $w_{\hat t}$ where $\hat t=2,3,...,T$, respectively. Because temporal properties of time window, $w$, depends on window size, $ws$, and interval of time, $\Delta t$, evaluating performance based on sliding window approach show model's performance under various temporal condition, such as temporal frequency, seasonality, cycles (business cycles, economy cycle, war, etc), serial correlation, hence, comparison between models are not fair without considering appropriate sliding window parameters.
 
 Sliding window is specially important in dynamic based graph when applying ensemble models on top of dynamic graph models, as we will show later, overall performance depends on size of window, number of epoch per window, number of windows, number of batch per window, number of window, and time budget. Furthermore, sequence of windows allows one to apply a higher level of abstraction over sequence of events which may influence models design.
