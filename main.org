@@ -5,6 +5,7 @@
 #+OPTIONS: toc:nil
 #+LATEX_CLASS: IEEE
 #+latex_header: \usepackage[backend=biber, style=numeric]{biblatex}
+#+latex_header: \usepackage{algpseudocode}
 #+latex_header: \addbibresource{reference.bib}
 
 * Introduction
@@ -207,6 +208,7 @@ Raw message is introduced as a parameters that provide necessary information to 
 #+attr_html: :width 500px
 [[file:images/dynamic-graph-diagram.png][dynamic graph diagram]]
 
+
 Figure. ref:dynamic-graph-diagram illustrate dynamic graph. This helps visualize sliding window on dynamic graph setting which we discuss in this section. In Figure ref:dynamic-graph-diagram, Dynamic graph diagram box denotes edge/node deletion and edge/node creation notation while the dynamic graph box at the top illustrate events that happens to the dynamic graph. Node creation is represented as the beginning of the thick horizontal line while the end of the line represent node deletion. Horizontal lines represent edges creation event. Arrow head of the horizontal line is direction of flow of edge event. No arrow means event can flow both way. Existence of edge event are represented as length of horizontal line attaches to horizontal line.
 
 Sliding window approaches turn any time series dataset into a supervised learning problem. Given that an instance in a dataset is an event with timestamp, train-test-split are a kind of sliding window where you only have 1 window to train to predict the future. Mathematically, consider dynamic networks observed at discrete time steps, $1,2,...,T$. For each $t = 1,...,T$, one trains model on window $w_{t}$ where $t=1,2,...,T-1$ to predict score of $w_{\hat t}$ where $\hat t=2,3,...,T$, respectively. Because temporal properties of time window, $w$, depends on window size, $ws$, and interval of time, $\Delta t$, evaluating performance based on sliding window approach show model's performance under various temporal condition, such as temporal frequency, seasonality, cycles (business cycles, economy cycle, war, etc), serial correlation, hence, comparison between models are not fair without considering appropriate sliding window parameters.
@@ -281,7 +283,82 @@ It is important to note that temporal parameters can be applied "during ensemble
 Using sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
 
 ** TODO Explains how ensemble is constructed from =ensemble_variation_1= and =ensemble_variation_2= :noexport:
-** TODO use pseudocode to describe. :noexport:
+** TODO use pseudocode to describe. :ignore:
+#+BEGIN_SRC python
+edge_index = ws
+Classifiers_set = Empty
+while edge_index < data.size:
+    ensembles = get_all_ensembles(window_index, C_ws)
+    for each (index) in ensembles:
+        temporal_parameters_set = get_temporal_parameters(C_ws, index)
+        for (pred_next, keep_last, stride) in temporal_parameters_set:
+            C = train_classifier(pred_next, keep_last, strides, batch_size, epoch)
+            add C to Classifiers_set
+    output = voting_ensemble(Classifiers_set)
+#+END_SRC
+
+#+BEGIN_EXPORT latex
+\begin{algorithmic}
+\algsetblock[Name]{Output}{Output}{3}{1cm}
+\algsetblock[Name]{Input}{Input}{3}{1cm}
+\algsetblock[Name]{Begin}{End}{3}{1cm}
+\Input
+ \State $Data$
+ \State $ws$
+ \State $bs$
+ \State $stride$
+ \State $C_{ws}$
+ \State $C_{PW}$
+\Input
+
+\Output
+ \State $SCORE: Predictive score$
+\Output
+
+\Begin
+    \State $window\_index \gets ws$
+    \While{$window\_index < data.size$}
+    \State $Ensembles = get\_all\_ensembles(window\_index, C_{ws}$
+    \For{hi}
+    \EndFor
+    \If{$N$ is even}
+        \State $X \gets X \times X$
+        \State $N \gets \frac{N}{2}$  \Comment{This is a comment}
+    \ElsIf{$N$ is odd}
+        \State $y \gets y \times X$
+        \State $N \gets N - 1$
+    \EndIf
+    \EndWhile
+\End
+\end{algorithmic}
+#+END_EXPORT
+
+*** pseudocode :noexport:
+#+BEGIN_SRC
+  - INPUT
+    classifier: E = {c_1, c_2, ... , c_m}
+    dataset: D = {e_1, e_2, ... , e_k}
+  - DEFINE
+    Classifier predictions: Preds
+    Ensemble accuracy: Acc
+    The window parameters:
+    The temporal parameters:
+    The ensemble parameters:
+    $w_i$
+  - OUTPUT
+    AUC: auc score
+    AP: ap score
+  - BEGIN
+    // how is number of ensemble determined?
+
+    for each C_i n ensemble E
+  - END
+
+#+END_SRC
+
+#+BEGIN_EXPORT latex
+INPUT something
+#+END_EXPORT
 * Dataset
 :PROPERTIES:
 :ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
