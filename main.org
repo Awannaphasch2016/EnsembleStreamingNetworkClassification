@@ -198,7 +198,6 @@ Our ensemble model is based on TGN [[cite:&rossi2020temporal]]. Conceptually, TG
 
 According to taxonomy from Skarding et al. [[cite:&skardingFoundationsModelingDynamic2021]], TGN can be either continuous node-dynamic evolving graph neural network or continuous node-dynamic temporal graph neural network. Continuous prefix indicates that TGN models over continuous time. This type of model can directly embed time via positional encoding which allows for more accurate modeling over changes during time interval. Next, node dynamic prefix indicates that TGN is an inductive models. In the other word, TGN can predict dynamic graph tasks for sequence of input involves node addition/deletion events. TGN does this by processing a batch of interactive event without information of changing graph topology, instead, information of graph topology is included in nodes embedding. Note that TGN does not have access to information of evolution of graph topology which are global (graph-wise memory). Node embedding only aware of local changes (node-wise memory). Lastly, because TGN is an inductive model, TGN can be applied to either evolving network, a dynamic graph that only has node and edges additional events, or interaction network, a dynamic graph that has node/edges deletion/addition events.
 
-
 The main contribution of TGN is an introduction of memory vector embedding whose goal is to keep track of history of graph evolution. Memory is a generalized concept for continuous node-dynamic evolving/temporal graph neural network. Similar to how RNN introduces state embedding to keep track of changes of fully-connected network's hidden state over time. TGN replaces hidden embedding of message passing neural network (MPNN) with memory embedding to keep track of changes of message passing framework's message embedding over time. Lets i and j be nodes connected by incident edges where i is the target node and j is its neighbor. Message phase of MPNN [[cite:&gilmer2017neural]] is formulated as followed:
 
 $\mathbf{m}_{i}(t)=\operatorname{msg}_{\mathrm{t}}\left(\mathbf{h}_{i}\left(t\right), \mathbf{h}_{j}\left(t\right), \mathbf{e}_{i j}(t)\right)$
@@ -226,45 +225,46 @@ Raw message is introduced as a parameters that provide necessary information to 
 ** Parameters Setting
 #+NAME: parameters
 #+CAPTION: Parameters symbols and descriptions
-|---------------------+---------------------------+--------------------------------------------------------------|
-|---------------------+---------------------------+--------------------------------------------------------------|
-|                     | parameters                | description                                                  |
-|---------------------+---------------------------+--------------------------------------------------------------|
-| window parameters   | $w_i$                     | i-th window                                                  |
-|                     | $ws$                      | window size                                                  |
-|                     | $\vert w \vert$           | number of window used during training                        |
-|                     | $bs$                      | batch size for a given window where $bs < ws$                |
-| temporal parameters | $stride$                  | window stride                                                |
-|                     | $pred\_next_{n}$          | predict instances that are in window that is n window away.  |
-|                     | $keep\_last\_n$           | number of window to keep as window slides forward            |
-|                     | $total\_training_windows$ | total number of instances to be trained for                  |
-|                     | $PW$                      | granularity of prediction. Prediction length during training |
-| ensemble parameters | $E_i$                     | i-th model in ensemble                                       |
-|                     | $\vert E \vert$           | number of models used in ensemble                            |
-|                     | $train\_w_{i}$            | i-th window is the first window to begin training            |
+|---------------------+-----------------+--------------------------------------------------------------|
+|---------------------+-----------------+--------------------------------------------------------------|
+|                     | parameters      | description                                                  |
+|---------------------+-----------------+--------------------------------------------------------------|
+| window parameters   | $w_i$           | i-th window                                                  |
+|                     | $ws$            | window size                                                  |
+|                     | $ei$            | i-th indices of edge                                         |
+|                     | $\vert w \vert$ | number of window used during training                        |
+|                     | $bs$            | batch size for a given window where $bs < ws$                |
+| temporal parameters | $s$             | window stride                                                |
+|                     | $pn_{n}$        | predict instances that are in window that is n window away.  |
+|                     | $kl$            | number of window to keep as window slides forward            |
+|                     | $total\_train$  | total number of instances to be trained for                  |
+|                     | $pw$            | granularity of prediction. Prediction length during training |
+| ensemble parameters | $E_{i}$         | i-th classifier model in ensemble                            |
+|                     | $\vert E \vert$ | number of models used in ensemble                            |
+|                     | $train\_w_{i}$  | i-th window is the first window to begin training            |
 
 #+name: pseducode for ensemble framework for sliding windows
 #+caption: pseducode for ensemble framework for sliding windows
 #+BEGIN_EXPORT latex
-\begin{algorithm}
-\begin{algorithmic}
-\REQUIRE  $Data$,$ws$,$bs$,$stride$,$C_{ws}$,$C_{PW}$
-\ENSURE $Score$
+\begin{algorithm*}
+\begin{algorithmic}[1]
+\REQUIRE  $data$,$ws$,$bs$,$s$,$pw$
+\ENSURE $score$
 \STATE $edge\_index = ws$
 \STATE $classifiers\_set = Empty$
 \WHILE{$edge\_index < data.size$}
-    \STATE $Ensembles = get\_all\_ensembles(window\_index, C_{ws})$
+    \STATE $Ensembles = get\_all\_ensembles(edge\_index, ws)$
     \FOR{each $index$ in $ensembles$}
-        \STATE $tepmoral\_parameters_set = get\_tepmoral\_parameters(C_{ws}, index)$
-        \FOR{$(pred\_next, keep\_last, stride)$ in $temporal_\_parameters\_set$}
-            \STATE $c = train\_classifier(pred\_next, keep\_last, strides, batch\_size, epoch)$
-            \STATE add $c$ to $classifier\_set$
+        \STATE $tepmoral\_parameters\_set = get\_tepmoral\_parameters(ws, index)$
+        \FOR{$(pn, kl, s)$ in $temporal_\_parameters\_set$}
+            \STATE $E = train\_classifier(pn, kl, s, bs, epoch)$
+            \STATE add $E$ to $classifier\_set$
         \ENDFOR
     \ENDFOR
-    \STATE $output = voting\_ensemble(classifier\_set)$
+    \STATE $score = voting\_ensemble(classifier\_set)$
 \ENDWHILE
 \end{algorithmic}
-\end{algorithm}
+\end{algorithm*}
 #+END_EXPORT
 
 
@@ -278,55 +278,17 @@ Raw message is introduced as a parameters that provide necessary information to 
 #+attr_html: :width 500px
 [[file:./images/screenshot_20220425_110609.png]]
 
-In sliding window evaluation setting, one needs to make sure proposed model and benchmark model is tested as fair as possible. Furthermore, to extract the most benefit from ensemble models, participated models should provide diverse predictive information. Table ref:parameters provides list of parameters that must be considered to maximize diversity of predictive information in ensemble models.
+Ensembles benefits from combining models with diverse predictive information. Table ref:parameters provides list of parameters to consider to maximize diversity of predictive information in ensemble models.
 
-According to Table ref:parameters, we categorize parameters of sliding window evaluation into four categories: windows parameters, temporal parameters, and ensemble parameter where each are collections of parameters and hyperparameters of windows, time, and ensembles models, respectively. Illustration of window parameters, temporal parameters, granularity parameters groups are provided in Figure ref:window_parameters, ref:temporal_parameters, and ref:granularity_parameters. Symbols used in figures followed Figure ref:symbols.
-
-# Granularity is determined by prediction length during training. This parameter is important because it tells the model to minimize its mistake for certain time interval. In the other word, a model whose prediction performance is optimized over 10 days will be different to model whose performance is optimized over one day. Larger model that is trained on larger granularity ignores short term stochasticity of temporal dependencies.
-
-It is important to note that temporal parameters can be applied "during ensemble formation" and "in-between ensemble formation." During ensemble formation referring to the modeling step where, given a fix set of training length, N number of individuals ensembles are trained. This step happens before finalize voting predictive score for an ensemble performance. On the other hand, in-between ensemble formation occurs after ensemble performance of the previous timestep is finalized and set of training instance is adjusted (window moves forward). This happens after previous training ended and before current training starts.
+According to Table ref:parameters, we categorize parameters of sliding window evaluation into the following categories: windows parameters, temporal parameters, and ensemble parameter. According to figure ref:Ensemble, at the top, the figure illustrate sequential data the oldest event $w_0$ to newest event $w_{N}$ where $w_{i}$ is a batch of events. At the bottom of the figure in the rectangle titled "Ensemble variation 1" (Ensemble variation 2 is illustrated in figure ref:ensemble_variation_2) the figure illustrates five classifiers $E_i$ where $i = 0,1,2,3,4$. Each classifier, $E_i$, is created from different combination parameters. Furthermore, figure ref:Ensemble illustrate how $train\_w_{i}$ and $pred\_next_{i}$ work together. Figure ref:symbols shows meaning of symbols used to illustrate ensemble framework. According to algorithm ref:pseducode, temporal parameters of each classifiers are automatically generated based on input arguments. This step is shown in algorithm ref:pseducode at line 6. Depends on input arguments, classifiers will be trained on different set of temporal parameters. According to ref:Ensemble, there are two set of temporal parameters that can be set: one for sequential data, and one for ensembles. Due to large combination of parameters set, one may consider using time budget to reduce size of solution space.
 
 #+name: ensemble_variation_2
 #+CAPTION: ensemble variation 2
 #+attr_html: :width 500px
 [[file:./images/screenshot_20220425_110823.png]]
 
-# We proposed two ways of doing ensemble which are shown in Figure ref:ensemble_variation_1 and Figure. ref:ensemble_variation_2. Let fix =predict_name_n= to be 1, Figure. ref:ensemble_variation_1 has five windows from $w_0$ to $w_4$. Ensemble variation 1 output 3
-
-Using sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
 
 ** TODO Explains how ensemble is constructed from =ensemble_variation_1= and =ensemble_variation_2= :noexport:
-** TODO use pseudocode to describe. :ignore:
-:PROPERTIES:
-:ID:       1994cb5d-3d6c-415a-91d9-875b061002a7
-:END:
-
-*** pseudocode :noexport:
-#+BEGIN_SRC
-  - INPUT
-    classifier: E = {c_1, c_2, ... , c_m}
-    dataset: D = {e_1, e_2, ... , e_k}
-  - DEFINE
-    Classifier predictions: Preds
-    Ensemble accuracy: Acc
-    The window parameters:
-    The temporal parameters:
-    The ensemble parameters:
-    $w_i$
-  - OUTPUT
-    AUC: auc score
-    AP: ap score
-  - BEGIN
-    // how is number of ensemble determined?
-
-    for each C_i n ensemble E
-  - END
-
-#+END_SRC
-
-#+BEGIN_EXPORT latex
-INPUT something
-#+END_EXPORT
 * Dataset
 :PROPERTIES:
 :ID:       031487f0-84ab-4757-b3e6-e5bd4f74ded9
