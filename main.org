@@ -222,7 +222,7 @@ $\mathbf{z}_{i}(t)=\operatorname{emb}(i, t)=\sum_{j \in n_{i}^{k}([0, t])} Z\lef
 where $z_{i}$ is a temporal embedding of node, $i$. Notice that $emb$ is a function of target node, $i$, and time, $t$. Variation of $emb$ are identity, time projection, temporal graph attention, and temporal graph sum. Please refer to TGN paper [[cite:&rossi2020temporal]] for more information. In the paper, we will be using temporal graph attention as its shown to have the best performance.
 
 Raw message is introduced as a parameters that provide necessary information to computer $msg()$ function which are information processed interactions up until the current iteration (current interactions are not included.) See Illustration ref:TGN for flow of TGN implementation.
-** Parameters Setting
+** Ensemble Framework for Sliding Window
 #+NAME: parameters
 #+CAPTION: Parameters symbols and descriptions
 |---------------------+-----------------+--------------------------------------------------------------|
