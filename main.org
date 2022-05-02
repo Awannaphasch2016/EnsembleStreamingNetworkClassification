@@ -293,19 +293,13 @@ Raw message is introduced as a parameters that provide necessary information to 
 [[file:images/screenshot_20220321_130824.png]]
 
 #+name: Ensemble Framework for Sliding Windows
-#+caption: Ensemble Framework for Sliding Windows
+#+caption: The figure illustrate ensemble framework for sliding windows. Rectangle labeled $w_i$ is window index relative to the most recent window, called referenced window. Index of windows that come after the referenced window are increamentally increase by 1 and index of windows that come before are incrementally decrease by 1. At the top of the figure is input sequential data and at the bottom is ensemble data.
 #+attr_html: :width 500px
-[[file:./images/screenshot_20220425_110609.png]]
+[[file:./images/screenshot_20220502_124024.png]]
 
 Ensembles benefits from combining models with diverse predictive information. Table ref:parameters provides list of parameters to consider to maximize diversity of predictive information in ensemble models.
 
-According to Table ref:parameters, we categorize parameters of sliding window evaluation into the following categories: windows parameters, temporal parameters, and ensemble parameter. According to figure ref:Ensemble, at the top, the figure illustrate sequential data the oldest event $w_0$ to newest event $w_{N}$ where $w_{i}$ is a batch of events. At the bottom of the figure in the rectangle titled "Ensemble variation 1" (Ensemble variation 2 is illustrated in figure ref:ensemble_variation_2) the figure illustrates five classifiers $E_i$ where $i = 0,1,2,3,4$. Each classifier, $E_i$, is created from different combination parameters. Furthermore, figure ref:Ensemble illustrate how $train\_w_{i}$ and $pred\_next_{i}$ work together. Figure ref:symbols shows meaning of symbols used to illustrate ensemble framework. According to algorithm ref:pseducode, temporal parameters of each classifiers are automatically generated based on input arguments. This step is shown in algorithm ref:pseducode at line 6. Depends on input arguments, classifiers will be trained on different set of temporal parameters. According to ref:Ensemble, there are two set of temporal parameters that can be set: one for sequential data, and one for ensembles. Due to large combination of parameters set, one may consider using time budget to reduce size of solution space.
-
-#+name: ensemble_variation_2
-#+CAPTION: ensemble variation 2
-#+attr_html: :width 500px
-[[file:./images/screenshot_20220425_110823.png]]
-
+According to Table ref:parameters, we categorize parameters of sliding window evaluation into the following categories: windows parameters, temporal parameters, and ensemble parameter. According to figure ref:Ensemble, at the top, the figure illustrate sequential data the oldest event $w_0$ to newest event $w_{N}$ where $w_{i}$ is a batch of events. At the bottom of the figure in the rectangle, the figure illustrates five classifiers $E_i$ where $i = 0,1,2,3,4$. Each classifier, $E_i$, is created from different combination parameters. Furthermore, figure ref:Ensemble illustrate how $train\_w_{i}$ and $pred\_next_{i}$ work together. Figure ref:symbols shows meaning of symbols used to illustrate ensemble framework. According to algorithm ref:pseducode, temporal parameters of each classifiers are automatically generated based on input arguments. This step is shown in algorithm ref:pseducode at line 6. Depends on input arguments, classifiers will be trained on different set of temporal parameters. According to ref:Ensemble, there are two set of temporal parameters that can be set: one for sequential data, and one for ensembles. Due to large combination of parameters set, one may consider using time budget to reduce size of solution space.
 
 ** TODO Explains how ensemble is constructed from =ensemble_variation_1= and =ensemble_variation_2= :noexport:
 * Dataset
