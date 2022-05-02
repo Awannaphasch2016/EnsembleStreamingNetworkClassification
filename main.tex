@@ -1,4 +1,4 @@
-% Created 2022-04-25 Mon 13:36
+% Created 2022-05-02 Mon 04:12
 % Intended LaTeX compiler: pdflatex
 \documentclass{IEEEtran}
 \usepackage[utf8]{inputenc}
@@ -25,7 +25,7 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:org7970534}
+\label{sec:org75150f3}
 Often, real world problems involve entities and their relationship. This is best represented by graph data structures. In the case where graphs evolve overtimes, dynamic graph can be used to model them.
 
 In the field of machine learning, dynamic graph modeling is still under explored, but its applications has been explored more recently in the past few years. Applications involve tasks such as graph protection, link prediction, entity/relation prediction, node clustering, node classification, and node attribute prediction (aka node regression), just to name a few \cite{kazemiRepresentationLearningDynamica}. Dynamic graph models are used to solve real world application involves traffic prediction \cite{yuanSurveyTrafficPrediction2021}, recommendation system \cite{kazemiRepresentationLearningDynamica}, knowledge graph completion \cite{cai2022temporal}, ecological network, distributed computing, interactions of economic agents, brain networks, \cite{holme2015modern}
@@ -56,13 +56,13 @@ So far, we have mentioned design aspects of dynamic graph models that are overlo
 [What are brief results of the proposed design?] It is not yet clear to me what I should write for this.
 
 \section{Related Work}
-\label{sec:org31c6caa}
+\label{sec:orgc19c0f4}
 \subsection{Static Graph Modeling}
-\label{sec:org12e1b37}
+\label{sec:org210f684}
 
 At the beginning of graph based deep learning model, literature has tried to generalized convolution filter by generalized CNN grid filter for graph input. This only works for specific kind of graph that modified CNN grid is designed for. Another way to explore convolution filter is to convert graph from graph domain into frequency domain or Fourier domain. Filter in Fourier in domain is called spectral filter proposed by Defferard et al. \cite{defferrard2016convolutional} by using K-localized convolutional neural network on graph. Based on \cite{defferrard2016convolutional}, Kipf el at. \cite{kipf2016semi} purposed GCN where K is 1 and approximation of convolution filter is not learned by neural network instead filters parameters are calculated with Chebyshev approximation. GCN is one of the first GNN architecture that successfully applied as semi-supervised model. Downside of GCN is designed for transductive setting because graph Laplacian is known during the training. GraphSage \cite{hamilton2017inductive} solves the problem by using generalized neighbor information aggregation function (message passing framework), instead of diffuse information to neighbor with graph Laplacian. This also helps reduce over-fitting. Models using graph Laplacian or alike such as GCN is called spectral-based GNN while models that use neighbor aggregation function is called spatial-based GNN.
 \subsection{Dynamic Graph}
-\label{sec:orgabfda8b}
+\label{sec:org5d57357}
 \subsubsection{Taxonomies of Dynamic Graph}
 \label{taxonomies of dynamic graph}
 At the time of writing, multiple taxonomies of dynamic graph models has been proposed. In this related work section, we will discuss previous attempts to categorize dynamic graph models into groups. Before discussing previous attempt, one should understand types of dynamic behavior that can affect dynamic graph models. There are two types of dynamic behaviors which are referred to in referenced literature by different names, nonetheless, we will refer to the two types as ``dynamic behavior on graph'' and ``dynamic behavior over graph''. One can think of dynamic behavior on graph as communication between nodes that happens via edges. Dynamic  behavior over graph can be think of as changes of graph as a whole over time. Intuitively, ``dynamic behavior on graph'' concerns micro (node/edges) levels while ``dynamic behavior over graph'' concern macro level --- concern graph as a whole. An example to emphasize on the difference, given that there exist a group of individuals, Evolution of individuals (nodes) ``role'' depends on when and how they interact. At the macro level, a member of a group may leave and join. This behavior also depends on time interval that experiment considers.
@@ -76,23 +76,23 @@ Skarding et al. \cite{skardingFoundationsModelingDynamic2021} takes interesting 
 Note that meaning of temporal networks is ambiguous outside of skarding et al's paper \cite{skardingFoundationsModelingDynamic2021} context. In ``Temporal Network'' paper, Holme et al. \cite{holme2012temporal} introduce ``time-respecting'' path as a property of temporal network. Graph with time-respect path contains edges whose weight value represents time when edges forms. We will adopt taxonomy presented in \cite{skardingFoundationsModelingDynamic2021} because including adopting temporal network definition. This is unambiguous because time-respecting path has not explored at all in the machine learning at the time of writing. Furthermore, all types of dynamic graph can be represented as a form of multilayer graph. \cite{kivela2014multilayer}
 
 \subsubsection{Dynamic Graph Modeling}
-\label{sec:org97cf2a1}
+\label{sec:org101864b}
 Before designing dynamic graph models, one must consider construction of dynamic graph input based on a given dataset. Then, models can be designed on top of constructed input. Dynamic graph construction is out of scope of this paper, but it is important to emphasize that model architecture is heavily dependent on input. Example of input graph construction are aggregated graph (edge-weighted graph \cite{qu2020continuous}), synthetic link between static graph \cite{kapoor2020examining}, and different graph. When designing dynamic graph models, one must consider node dynamic, link duration, and temporal granularity. Node dynamic concerns presents of nodes. Link duration concerns presents of edges, and temporal granularity concern either discrete or continuous occurrence of events \cite{kazemiRepresentationLearningDynamica}.
 
 History of deep learning solution of dynamic graph models can be traced back to 2016. At the time, literature explored methods of aggregating information on graph from node neighbor with varying weight, such as using tree like structure for NLP tasks and grid like structure. Furthermore, RNN had been used to learn temporal features while structure features are learned by CNN, GNN, or random walk. This can be done either by simply stacking temporal layer to structure layer or integrate temporal and structure components in to one layer \cite{seo2018structured}. Note that 2016 is around the peak of RNN hype. Around the same time, research effort was put toward the development of convolution filters. Later, Xu et al. \cite{xu2019generative} purposed G-GCN. The models disregard time and take into consideration only topology changes. This is done by extending variational Graph Autoencoder (VGAE) \cite{kipf2016variational} to predict unseen node. Dynamic graph models that disregard time components such as G-GCN are considered as pseudo-dynamic models \cite{skardingFoundationsModelingDynamic2021}.
 
 More modern solution of dynamic graph modeling develop around dynamic graph neural network (DGNN) architecture. Early development of DGNN models use stack of aggregated static graph as input. The aggregated static graph are represented as weighted graph. Gu et al. \cite{qu2020continuous} constructs dynamic graph input into stack of weighted static graph by aggregating graph within fixed interval and feed the input to modified GCN model. More recently, models concerning continuous temporal granularity was purposed, in particular, continuous dynamic graph neural network (continuous DGNN). Continuous DGNN updates information for every time an event (edge instance) occurs \cite{skardingFoundationsModelingDynamic2021}. Continuous DGNN take temporal difference, time interval between event, as input features. Time point process based DGNN is a continuous DGNN that use neural network to approximate point process parameters. Alternatively, neural network can be used to encode temporal pattern by learning representation of time embedding vector. This approach is called time encoding DGNN. TGAT was the first continuous DGNN to encode time by utilizing functional time embedding similar to time2vec. TGAT use information retrieval based attention which is parameterized by query, key, value --- first proposed by transformer \cite{vaswani2017attention}. TGN \cite{rossi2020temporal} adds memory module to TGAT. Our ensemble models is build on top of TGN.
 \subsection{Sliding Window Evaluation}
-\label{sec:orgc93db96}
+\label{sec:org4121b19}
 
 In the time of writing, dynamic graph model literature still uses simple train-val-test split as a model evaluation standards. We provide examples of well accepted paper to make a point. Tian et al. \cite{tian2021self} uses train-val-test split to evaluate self-supervised learning on strictly evolving graph and compare with models. Performance of models are evaluated based on two tasks: link prediction and node classification. The comparison is limited to static graph models, and dynamic random walk. Details to extend static graph models to dynamic graphs are not discussed. Similarly, using the same dataset and train-val-test split, Rssi et al. \cite{rossi2020temporal}. Rossi et al. compares its own, temporal graph neural network (TGN) to one other dynamic graph, DyRep. The comparison is acceptable because the same dataset is used in the experiment. Dataset used in mentioned papers is presented as undirected interaction network.
 
 To the best of my knowledge, Skarding et al. wrote ``BENCHMARKING GRAPH NEURAL NETWORKS ON DYNAMIC LINK PREDICTION'' \cite{skarding2021benchmarking} which is the only paper to compare dynamic network based models using sliding window evaluation. Directed and undirected interaction network is used. Interaction network can be easily aggregated to form ``graph snapshot.'' Hence, using interaction network, one can pass in continuous network to continuous model and discrete network to discrete models. Performance of each model varies across metric score. Hence, the paper concludes that optimizing the hyperparamters are essential for obtaining a representative score. Furthermore, Skarding et al. observes that using window of size 5 or 10 consistently produce best results particularly among discrete models.
 
 \section{Approaches}
-\label{sec:org193b9ed}
+\label{sec:org810af19}
 \subsection{Sliding Window Evaluation}
-\label{sec:orgcc18a4c}
+\label{sec:orgee23f4b}
 \href{images/dynamic-graph-diagram.png}{dynamic graph diagram}
 
 
@@ -105,7 +105,7 @@ Sliding window is specially important in dynamic based graph when applying ensem
 It is very important to understand that how DGNN update events --- stream data, one instance at a time, or in batch --- imply type of DGNN where continuous DGNNs train an event at a time while discrete DGNNs train batch of events at a time.
 
 \subsection{Temporal Graph Neural Network (TGN)}
-\label{sec:orgf337c0c}
+\label{sec:orgf5293b7}
 
 \begin{figure}[htbp]
 \centering
@@ -141,8 +141,8 @@ Due to inductive nature of TGN, TGN must deal with staleness problem, in particu
 where \(z_{i}\) is a temporal embedding of node, \(i\). Notice that \(emb\) is a function of target node, \(i\), and time, \(t\). Variation of \(emb\) are identity, time projection, temporal graph attention, and temporal graph sum. Please refer to TGN paper \cite{rossi2020temporal} for more information. In the paper, we will be using temporal graph attention as its shown to have the best performance.
 
 Raw message is introduced as a parameters that provide necessary information to computer \(msg()\) function which are information processed interactions up until the current iteration (current interactions are not included.) See Illustration \ref{TGN} for flow of TGN implementation.
-\subsection{Parameters Setting}
-\label{sec:orgd6aace9}
+\subsection{Ensemble Framework for Sliding Window}
+\label{sec:orgd416f33}
 \begin{table}[htbp]
 \caption{\label{parameters}Parameters symbols and descriptions}
 \centering
@@ -161,29 +161,45 @@ temporal parameters & \(s\) & window stride\\
  & \(kl\) & number of window to keep as window slides forward\\
  & \(total\_train\) & total number of instances to be trained for\\
  & \(pw\) & granularity of prediction. Prediction length during training\\
-ensemble parameters & \(c\) & classifier model in ensemble\\
- & \(\vert E \vert\) & number of models used in ensemble\\
+ensemble parameters & \(C_{i}\) & i-th classifier model in ensemble\\
+ & \(\vert C \vert\) & number of models used in ensemble\\
  & \(train\_w_{i}\) & i-th window is the first window to begin training\\
 \end{tabular}
 \end{table}
 
 \begin{algorithm*}
 \begin{algorithmic}[1]
-\REQUIRE  $data$,$ws$,$bs$,$s$,$C_{ws}$,$C_{pw}$
+\REQUIRE  $data$,$ws$,$bs$,$s$,$\vert C \vert$, $n\_epoch$
 \ENSURE $score$
-\STATE $edge\_index = ws$
-\STATE $classifiers\_set = Empty$
-\WHILE{$edge\_index < data.size$}
-    \STATE $Ensembles = get\_all\_ensembles(window\_index, C_{ws})$
-    \FOR{each $index$ in $ensembles$}
-        \STATE $tepmoral\_parameters_set = get\_tepmoral\_parameters(C_{ws}, index)$
-        \FOR{$(pn, kl, stride)$ in $temporal_\_parameters\_set$}
-            \STATE $c = train\_classifier(pn, kl, s, bs, epoch)$
-            \STATE add $c$ to $classifier\_set$
+\STATE $\text{assert ws \% bs == 0}$
+\STATE $\text{assert s \% bs == 0}$
+\STATE $w\_count = (data.size \div ws) - 1$ \COMMENT{ -1 accounts for test set.}
+\STATE $init\_ws = \vert C \vert \cdot ws$ \COMMENT{ Set initial window size }
+\STATE $i\_edges = init\_ws - 1$  \COMMENT{ Set edges index }
+\STATE $E = \text{ empty set} $ \COMMENT{ Initialize ensemble }
+\FOR{$(count,i) \text{ in } enumerate(range(\vert C \vert))$}
+    \STATE $(i\_edge - ((i + 1) *  ws), i\_edge) \text{ append to }E[i][\text{"data"}]$
+    \STATE $(i + 1) * ws \text{ append to }E[i][\text{"data size"}]$
+    \STATE $E[i][\text{"classifier"}] = \text{ empty set}$
+\ENDFOR
+\FOR{$w \text{ in } w\_count$}
+    \FOR{$(count,i) \text{ in } enumerate(range(\vert C \vert))$}
+        \FOR{$e \text{ in } n\_epoch$}
+            \FOR{$j \text{ in } range(E[i][\text{"data size"}][-1] \div bs)$}
+                \STATE $begin\_index = E[i][\text{"data"}][-1][0]$
+                \STATE $end\_index = begin\_index + ((j + 1) * bs)$
+                \IF{$E[i][\text{"classifier"}] \text{ is None}$}
+                    \STATE $E[i][\text{"classifier"}] = TGN(data[begin\_index:end\_index])$
+                \ENDIF
+                \STATE $E[i][\text{"classifier"}].train(data[begin\_index:end\_index])$
+            \ENDFOR
         \ENDFOR
+        \STATE $(end\_index, end\_index + ws) \text{ append to} E[i][\text{"data"}]$
+        \STATE $score = E[i][\text{"classifier"}].predict(E[i][\text{"data"}][-1])$
+        \STATE $score \text{ append to } E[\text{"ensemble"}]$
     \ENDFOR
-    \STATE $score = voting\_ensemble(classifier\_set)$
-\ENDWHILE
+    \STATE $score = E[\text{"ensemble"}]/\vert C \vert$
+\ENDFOR
 \end{algorithmic}
 \end{algorithm*}
 
@@ -202,22 +218,15 @@ ensemble parameters & \(c\) & classifier model in ensemble\\
 
 Ensembles benefits from combining models with diverse predictive information. Table \ref{parameters} provides list of parameters to consider to maximize diversity of predictive information in ensemble models.
 
-According to Table \ref{parameters}, we categorize parameters of sliding window evaluation into the following categories: windows parameters, temporal parameters, and ensemble parameter. According to figure \ref{Ensemble}, at the top, the figure illustrate sequential data the oldest event \(w_0\) to newest event \(w_{N}\) where \(w_{i}\) is a batch of events. At the bottom of the figure in the rectangle titled ``Ensemble variation 1'' (Ensemble variation 2 is illustrated in figure \ref{ensemble_variation_2}) the figure illustrates five classifiers \(E_i\) where \(i = 0,1,2,3,4\). Each classifier, \(E_i\), is created from different combination parameters. Furthermore, figure \ref{Ensemble} illustrate how \(train\_w_{i}\) and \(pred\_next_{i}\) work together. Figure \ref{symbols} shows meaning of symbols used to illustrate ensemble framework.
-
-Ensemble parameters is automatically generated. This step is shown in algorithm \ref{pseducode} at line
-
-
-It is important to note that temporal parameters can be applied ``during ensemble formation'' and ``in-between ensemble formation.'' During ensemble formation referring to the modeling step where, given a fix set of training length, N number of individuals ensembles are trained. This step happens before finalize voting predictive score for an ensemble performance. On the other hand, in-between ensemble formation occurs after ensemble performance of the previous timestep is finalized and set of training instance is adjusted (window moves forward). This happens after previous training ended and before current training starts.
+According to Table \ref{parameters}, we categorize parameters of sliding window evaluation into the following categories: windows parameters, temporal parameters, and ensemble parameter. According to figure \ref{Ensemble}, at the top, the figure illustrate sequential data the oldest event \(w_0\) to newest event \(w_{N}\) where \(w_{i}\) is a batch of events. At the bottom of the figure in the rectangle titled ``Ensemble variation 1'' (Ensemble variation 2 is illustrated in figure \ref{ensemble_variation_2}) the figure illustrates five classifiers \(E_i\) where \(i = 0,1,2,3,4\). Each classifier, \(E_i\), is created from different combination parameters. Furthermore, figure \ref{Ensemble} illustrate how \(train\_w_{i}\) and \(pred\_next_{i}\) work together. Figure \ref{symbols} shows meaning of symbols used to illustrate ensemble framework. According to algorithm \ref{pseducode}, temporal parameters of each classifiers are automatically generated based on input arguments. This step is shown in algorithm \ref{pseducode} at line 6. Depends on input arguments, classifiers will be trained on different set of temporal parameters. According to \ref{Ensemble}, there are two set of temporal parameters that can be set: one for sequential data, and one for ensembles. Due to large combination of parameters set, one may consider using time budget to reduce size of solution space.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{./images/screenshot_20220425_110823.png}
 \caption{\label{ensemble_variation_2}ensemble variation 2}
 \end{figure}
-
-Using sliding window evaluation approach, there are a lot of combination of parameters that can effect model's predictive information. For this reason, one may consider using time budget to reduce size of solution space.
 \section{Dataset}
-\label{sec:org5fed389}
+\label{sec:orgd63d25d}
 \textbf{Reddit dataset}: Reddit dataset are a bipartite network of interaction network involving two groups of nodes: Reddit threads and users. Row of the dataset is a tuple of including user-id, thread-id, timestamp, whether user is banned after this event, and pre-compute embedding score with 172 dimensions. There are 672448 instances of interaction (aka edges) which is collected in one month time interval with total 11,000 nodes. Property of Reddit dataset is shown in Table \ref{Datasets}.
 
 \begin{table}[htbp]
@@ -236,6 +245,6 @@ positive label percentages & 0.05 \%\\
 \end{tabular}
 \end{table}
 \section{Results}
-\label{sec:orgc9e2c2a}
+\label{sec:org1c53960}
 \printbibliography
 \end{document}

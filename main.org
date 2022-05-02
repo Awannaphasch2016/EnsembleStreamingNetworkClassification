@@ -223,6 +223,9 @@ where $z_{i}$ is a temporal embedding of node, $i$. Notice that $emb$ is a funct
 
 Raw message is introduced as a parameters that provide necessary information to computer $msg()$ function which are information processed interactions up until the current iteration (current interactions are not included.) See Illustration ref:TGN for flow of TGN implementation.
 ** Ensemble Framework for Sliding Window
+:PROPERTIES:
+:ID:       4fe5307c-8e9d-4b12-9389-cef37b452033
+:END:
 #+NAME: parameters
 #+CAPTION: Parameters symbols and descriptions
 |---------------------+-----------------+--------------------------------------------------------------|
@@ -239,8 +242,8 @@ Raw message is introduced as a parameters that provide necessary information to 
 |                     | $kl$            | number of window to keep as window slides forward            |
 |                     | $total\_train$  | total number of instances to be trained for                  |
 |                     | $pw$            | granularity of prediction. Prediction length during training |
-| ensemble parameters | $E_{i}$         | i-th classifier model in ensemble                            |
-|                     | $\vert E \vert$ | number of models used in ensemble                            |
+| ensemble parameters | $C_{i}$         | i-th classifier model in ensemble                            |
+|                     | $\vert C \vert$ | number of models used in ensemble                            |
 |                     | $train\_w_{i}$  | i-th window is the first window to begin training            |
 
 #+name: pseducode for ensemble framework for sliding windows
@@ -248,21 +251,37 @@ Raw message is introduced as a parameters that provide necessary information to 
 #+BEGIN_EXPORT latex
 \begin{algorithm*}
 \begin{algorithmic}[1]
-\REQUIRE  $data$,$ws$,$bs$,$s$,$pw$
+\REQUIRE  $data$,$ws$,$bs$,$s$,$\vert C \vert$, $n\_epoch$
 \ENSURE $score$
-\STATE $edge\_index = ws$
-\STATE $classifiers\_set = Empty$
-\WHILE{$edge\_index < data.size$}
-    \STATE $Ensembles = get\_all\_ensembles(edge\_index, ws)$
-    \FOR{each $index$ in $ensembles$}
-        \STATE $tepmoral\_parameters\_set = get\_tepmoral\_parameters(ws, index)$
-        \FOR{$(pn, kl, s)$ in $temporal_\_parameters\_set$}
-            \STATE $E = train\_classifier(pn, kl, s, bs, epoch)$
-            \STATE add $E$ to $classifier\_set$
+\STATE $\text{assert ws \% bs == 0}$
+\STATE $\text{assert s \% bs == 0}$
+\STATE $w\_count = (data.size \div ws) - 1$ \COMMENT{ -1 accounts for test set.}
+\STATE $init\_ws = \vert C \vert \cdot ws$ \COMMENT{ Set initial window size }
+\STATE $i\_edges = init\_ws - 1$  \COMMENT{ Set edges index }
+\STATE $E = \text{ empty set} $ \COMMENT{ Initialize ensemble }
+\FOR{$(count,i) \text{ in } enumerate(range(\vert C \vert))$}
+    \STATE $(i\_edge - ((i + 1) *  ws), i\_edge) \text{ append to }E[i][\text{"data"}]$
+    \STATE $(i + 1) * ws \text{ append to }E[i][\text{"data size"}]$
+    \STATE $E[i][\text{"classifier"}] = \text{ empty set}$
+\ENDFOR
+\FOR{$w \text{ in } w\_count$}
+    \FOR{$(count,i) \text{ in } enumerate(range(\vert C \vert))$}
+        \FOR{$e \text{ in } n\_epoch$}
+            \FOR{$j \text{ in } range(E[i][\text{"data size"}][-1] \div bs)$}
+                \STATE $begin\_index = E[i][\text{"data"}][-1][0]$
+                \STATE $end\_index = begin\_index + ((j + 1) * bs)$
+                \IF{$E[i][\text{"classifier"}] \text{ is None}$}
+                    \STATE $E[i][\text{"classifier"}] = TGN(data[begin\_index:end\_index])$
+                \ENDIF
+                \STATE $E[i][\text{"classifier"}].train(data[begin\_index:end\_index])$
+            \ENDFOR
         \ENDFOR
+        \STATE $(end\_index, end\_index + ws) \text{ append to} E[i][\text{"data"}]$
+        \STATE $score = E[i][\text{"classifier"}].predict(E[i][\text{"data"}][-1])$
+        \STATE $score \text{ append to } E[\text{"ensemble"}]$
     \ENDFOR
-    \STATE $score = voting\_ensemble(classifier\_set)$
-\ENDWHILE
+    \STATE $score = E[\text{"ensemble"}]/\vert C \vert$
+\ENDFOR
 \end{algorithmic}
 \end{algorithm*}
 #+END_EXPORT
